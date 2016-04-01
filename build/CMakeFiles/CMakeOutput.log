@@ -1,0 +1,331 @@
+The system is: Linux - 2.6.32-573.18.1.el6.x86_64 - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /opt/gcc-4.9.3/bin/gcc 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/2.8.12.2/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /opt/gcc-4.9.3/bin/g++ 
+Build flags: 
+Id flags: 
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/2.8.12.2/CompilerIdCXX/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1778366783/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1778366783.dir/build.make CMakeFiles/cmTryCompileExec1778366783.dir/build
+gmake[1]: entrant dans le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »
+/usr/bin/cmake -E cmake_progress_report /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1778366783.dir/testCCompiler.c.o
+/opt/gcc-4.9.3/bin/gcc    -o CMakeFiles/cmTryCompileExec1778366783.dir/testCCompiler.c.o   -c /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTryCompileExec1778366783
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1778366783.dir/link.txt --verbose=1
+/opt/gcc-4.9.3/bin/gcc       CMakeFiles/cmTryCompileExec1778366783.dir/testCCompiler.c.o  -o cmTryCompileExec1778366783 -rdynamic 
+gmake[1]: quittant le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1633768171/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1633768171.dir/build.make CMakeFiles/cmTryCompileExec1633768171.dir/build
+gmake[1]: entrant dans le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »
+/usr/bin/cmake -E cmake_progress_report /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1633768171.dir/CMakeCCompilerABI.c.o
+/opt/gcc-4.9.3/bin/gcc    -o CMakeFiles/cmTryCompileExec1633768171.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake/Modules/CMakeCCompilerABI.c
+Linking C executable cmTryCompileExec1633768171
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1633768171.dir/link.txt --verbose=1
+/opt/gcc-4.9.3/bin/gcc     -v CMakeFiles/cmTryCompileExec1633768171.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec1633768171 -rdynamic  
+Utilisation des specs internes.
+COLLECT_GCC=/opt/gcc-4.9.3/bin/gcc
+COLLECT_LTO_WRAPPER=/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper
+Target: x86_64-unknown-linux-gnu
+Configuré avec: ./configure --prefix=/opt/gcc-4.9.3 --with-gmp-include=/opt/gcc-4.9.3/include --with-gmp-lib=/opt/gcc-4.9.3/lib --with-mpfr-include=/opt/gcc-4.9.3/include --with-mpfr-lib=/opt/gcc-4.9.3/lib --with-mpc-include=/opt/gcc-4.9.3/include --with-mpc-lib=/opt/gcc-4.9.3/lib --with-cloog-include=/opt/gcc-4.9.3/include --with-cloog-lib=/opt/gcc-4.9.3/lib --enable-libada --enable-ld=yes
+Modèle de thread: posix
+gcc version 4.9.3 (GCC) 
+COMPILER_PATH=/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/
+LIBRARY_PATH=/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec1633768171' '-rdynamic' '-mtune=generic' '-march=x86-64'
+ /opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/collect2 --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec1633768171 /usr/lib/../lib64/crt1.o /usr/lib/../lib64/crti.o /opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtbegin.o -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3 -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../.. CMakeFiles/cmTryCompileExec1633768171.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtend.o /usr/lib/../lib64/crtn.o
+gmake[1]: quittant le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:/usr/bin/gmake "cmTryCompileExec1633768171/fast"]
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1633768171.dir/build.make CMakeFiles/cmTryCompileExec1633768171.dir/build]
+  ignore line: [gmake[1]: entrant dans le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »]
+  ignore line: [/usr/bin/cmake -E cmake_progress_report /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp/CMakeFiles 1]
+  ignore line: [Building C object CMakeFiles/cmTryCompileExec1633768171.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/opt/gcc-4.9.3/bin/gcc    -o CMakeFiles/cmTryCompileExec1633768171.dir/CMakeCCompilerABI.c.o   -c /usr/share/cmake/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTryCompileExec1633768171]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1633768171.dir/link.txt --verbose=1]
+  ignore line: [/opt/gcc-4.9.3/bin/gcc     -v CMakeFiles/cmTryCompileExec1633768171.dir/CMakeCCompilerABI.c.o  -o cmTryCompileExec1633768171 -rdynamic  ]
+  ignore line: [Utilisation des specs internes.]
+  ignore line: [COLLECT_GCC=/opt/gcc-4.9.3/bin/gcc]
+  ignore line: [COLLECT_LTO_WRAPPER=/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper]
+  ignore line: [Target: x86_64-unknown-linux-gnu]
+  ignore line: [Configuré avec: ./configure --prefix=/opt/gcc-4.9.3 --with-gmp-include=/opt/gcc-4.9.3/include --with-gmp-lib=/opt/gcc-4.9.3/lib --with-mpfr-include=/opt/gcc-4.9.3/include --with-mpfr-lib=/opt/gcc-4.9.3/lib --with-mpc-include=/opt/gcc-4.9.3/include --with-mpc-lib=/opt/gcc-4.9.3/lib --with-cloog-include=/opt/gcc-4.9.3/include --with-cloog-lib=/opt/gcc-4.9.3/lib --enable-libada --enable-ld=yes]
+  ignore line: [Modèle de thread: posix]
+  ignore line: [gcc version 4.9.3 (GCC) ]
+  ignore line: [COMPILER_PATH=/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec1633768171' '-rdynamic' '-mtune=generic' '-march=x86-64']
+  link line: [ /opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/collect2 --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec1633768171 /usr/lib/../lib64/crt1.o /usr/lib/../lib64/crti.o /opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtbegin.o -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3 -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../.. CMakeFiles/cmTryCompileExec1633768171.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtend.o /usr/lib/../lib64/crtn.o]
+    arg [/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/collect2] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTryCompileExec1633768171] ==> ignore
+    arg [/usr/lib/../lib64/crt1.o] ==> ignore
+    arg [/usr/lib/../lib64/crti.o] ==> ignore
+    arg [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtbegin.o] ==> ignore
+    arg [-L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3] ==> dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3]
+    arg [-L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64] ==> dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64]
+    arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+    arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+    arg [-L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../..] ==> dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../..]
+    arg [CMakeFiles/cmTryCompileExec1633768171.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtend.o] ==> ignore
+    arg [/usr/lib/../lib64/crtn.o] ==> ignore
+  remove lib [gcc]
+  remove lib [gcc_s]
+  remove lib [gcc]
+  remove lib [gcc_s]
+  collapse library dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3] ==> [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3]
+  collapse library dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64] ==> [/opt/gcc-4.9.3/lib64]
+  collapse library dir [/lib/../lib64] ==> [/lib64]
+  collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+  collapse library dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../..] ==> [/opt/gcc-4.9.3/lib]
+  implicit libs: [c]
+  implicit dirs: [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3;/opt/gcc-4.9.3/lib64;/lib64;/usr/lib64;/opt/gcc-4.9.3/lib]
+  implicit fwks: []
+
+
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3530175636/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3530175636.dir/build.make CMakeFiles/cmTryCompileExec3530175636.dir/build
+gmake[1]: entrant dans le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »
+/usr/bin/cmake -E cmake_progress_report /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec3530175636.dir/testCXXCompiler.cxx.o
+/opt/gcc-4.9.3/bin/g++     -o CMakeFiles/cmTryCompileExec3530175636.dir/testCXXCompiler.cxx.o -c /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTryCompileExec3530175636
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3530175636.dir/link.txt --verbose=1
+/opt/gcc-4.9.3/bin/g++        CMakeFiles/cmTryCompileExec3530175636.dir/testCXXCompiler.cxx.o  -o cmTryCompileExec3530175636 -rdynamic 
+gmake[1]: quittant le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec4052995337/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec4052995337.dir/build.make CMakeFiles/cmTryCompileExec4052995337.dir/build
+gmake[1]: entrant dans le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »
+/usr/bin/cmake -E cmake_progress_report /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building CXX object CMakeFiles/cmTryCompileExec4052995337.dir/CMakeCXXCompilerABI.cpp.o
+/opt/gcc-4.9.3/bin/g++     -o CMakeFiles/cmTryCompileExec4052995337.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTryCompileExec4052995337
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4052995337.dir/link.txt --verbose=1
+/opt/gcc-4.9.3/bin/g++      -v CMakeFiles/cmTryCompileExec4052995337.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec4052995337 -rdynamic  
+Utilisation des specs internes.
+COLLECT_GCC=/opt/gcc-4.9.3/bin/g++
+COLLECT_LTO_WRAPPER=/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper
+Target: x86_64-unknown-linux-gnu
+Configuré avec: ./configure --prefix=/opt/gcc-4.9.3 --with-gmp-include=/opt/gcc-4.9.3/include --with-gmp-lib=/opt/gcc-4.9.3/lib --with-mpfr-include=/opt/gcc-4.9.3/include --with-mpfr-lib=/opt/gcc-4.9.3/lib --with-mpc-include=/opt/gcc-4.9.3/include --with-mpc-lib=/opt/gcc-4.9.3/lib --with-cloog-include=/opt/gcc-4.9.3/include --with-cloog-lib=/opt/gcc-4.9.3/lib --enable-libada --enable-ld=yes
+Modèle de thread: posix
+gcc version 4.9.3 (GCC) 
+COMPILER_PATH=/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/
+LIBRARY_PATH=/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec4052995337' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64'
+ /opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/collect2 --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec4052995337 /usr/lib/../lib64/crt1.o /usr/lib/../lib64/crti.o /opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtbegin.o -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3 -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../.. CMakeFiles/cmTryCompileExec4052995337.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtend.o /usr/lib/../lib64/crtn.o
+gmake[1]: quittant le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:/usr/bin/gmake "cmTryCompileExec4052995337/fast"]
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTryCompileExec4052995337.dir/build.make CMakeFiles/cmTryCompileExec4052995337.dir/build]
+  ignore line: [gmake[1]: entrant dans le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »]
+  ignore line: [/usr/bin/cmake -E cmake_progress_report /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp/CMakeFiles 1]
+  ignore line: [Building CXX object CMakeFiles/cmTryCompileExec4052995337.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/opt/gcc-4.9.3/bin/g++     -o CMakeFiles/cmTryCompileExec4052995337.dir/CMakeCXXCompilerABI.cpp.o -c /usr/share/cmake/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTryCompileExec4052995337]
+  ignore line: [/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec4052995337.dir/link.txt --verbose=1]
+  ignore line: [/opt/gcc-4.9.3/bin/g++      -v CMakeFiles/cmTryCompileExec4052995337.dir/CMakeCXXCompilerABI.cpp.o  -o cmTryCompileExec4052995337 -rdynamic  ]
+  ignore line: [Utilisation des specs internes.]
+  ignore line: [COLLECT_GCC=/opt/gcc-4.9.3/bin/g++]
+  ignore line: [COLLECT_LTO_WRAPPER=/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/lto-wrapper]
+  ignore line: [Target: x86_64-unknown-linux-gnu]
+  ignore line: [Configuré avec: ./configure --prefix=/opt/gcc-4.9.3 --with-gmp-include=/opt/gcc-4.9.3/include --with-gmp-lib=/opt/gcc-4.9.3/lib --with-mpfr-include=/opt/gcc-4.9.3/include --with-mpfr-lib=/opt/gcc-4.9.3/lib --with-mpc-include=/opt/gcc-4.9.3/include --with-mpc-lib=/opt/gcc-4.9.3/lib --with-cloog-include=/opt/gcc-4.9.3/include --with-cloog-lib=/opt/gcc-4.9.3/lib --enable-libada --enable-ld=yes]
+  ignore line: [Modèle de thread: posix]
+  ignore line: [gcc version 4.9.3 (GCC) ]
+  ignore line: [COMPILER_PATH=/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/]
+  ignore line: [LIBRARY_PATH=/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTryCompileExec4052995337' '-rdynamic' '-shared-libgcc' '-mtune=generic' '-march=x86-64']
+  link line: [ /opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/collect2 --eh-frame-hdr -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTryCompileExec4052995337 /usr/lib/../lib64/crt1.o /usr/lib/../lib64/crti.o /opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtbegin.o -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3 -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../.. CMakeFiles/cmTryCompileExec4052995337.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtend.o /usr/lib/../lib64/crtn.o]
+    arg [/opt/gcc-4.9.3/libexec/gcc/x86_64-unknown-linux-gnu/4.9.3/collect2] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTryCompileExec4052995337] ==> ignore
+    arg [/usr/lib/../lib64/crt1.o] ==> ignore
+    arg [/usr/lib/../lib64/crti.o] ==> ignore
+    arg [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtbegin.o] ==> ignore
+    arg [-L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3] ==> dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3]
+    arg [-L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64] ==> dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64]
+    arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+    arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+    arg [-L/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../..] ==> dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../..]
+    arg [CMakeFiles/cmTryCompileExec4052995337.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/crtend.o] ==> ignore
+    arg [/usr/lib/../lib64/crtn.o] ==> ignore
+  remove lib [gcc_s]
+  remove lib [gcc]
+  remove lib [gcc_s]
+  remove lib [gcc]
+  collapse library dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3] ==> [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3]
+  collapse library dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../../../lib64] ==> [/opt/gcc-4.9.3/lib64]
+  collapse library dir [/lib/../lib64] ==> [/lib64]
+  collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+  collapse library dir [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3/../../..] ==> [/opt/gcc-4.9.3/lib]
+  implicit libs: [stdc++;m;c]
+  implicit dirs: [/opt/gcc-4.9.3/lib/gcc/x86_64-unknown-linux-gnu/4.9.3;/opt/gcc-4.9.3/lib64;/lib64;/usr/lib64;/opt/gcc-4.9.3/lib]
+  implicit fwks: []
+
+
+Determining if the function XOpenDisplay exists in the /usr/lib64/libX11.so;/usr/lib64/libXext.so passed with the following output:
+Change Dir: /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1197653792/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1197653792.dir/build.make CMakeFiles/cmTryCompileExec1197653792.dir/build
+gmake[1]: entrant dans le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »
+/usr/bin/cmake -E cmake_progress_report /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1197653792.dir/CheckFunctionExists.c.o
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=XOpenDisplay   -o CMakeFiles/cmTryCompileExec1197653792.dir/CheckFunctionExists.c.o   -c /usr/share/cmake/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec1197653792
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1197653792.dir/link.txt --verbose=1
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=XOpenDisplay    CMakeFiles/cmTryCompileExec1197653792.dir/CheckFunctionExists.c.o  -o cmTryCompileExec1197653792 -rdynamic -lX11 -lXext 
+gmake[1]: quittant le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »
+
+
+Determining if the function gethostbyname exists passed with the following output:
+Change Dir: /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec89934329/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec89934329.dir/build.make CMakeFiles/cmTryCompileExec89934329.dir/build
+gmake[1]: entrant dans le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »
+/usr/bin/cmake -E cmake_progress_report /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec89934329.dir/CheckFunctionExists.c.o
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=gethostbyname   -o CMakeFiles/cmTryCompileExec89934329.dir/CheckFunctionExists.c.o   -c /usr/share/cmake/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec89934329
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec89934329.dir/link.txt --verbose=1
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=gethostbyname    CMakeFiles/cmTryCompileExec89934329.dir/CheckFunctionExists.c.o  -o cmTryCompileExec89934329 -rdynamic 
+gmake[1]: quittant le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »
+
+
+Determining if the function connect exists passed with the following output:
+Change Dir: /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec1251594905/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec1251594905.dir/build.make CMakeFiles/cmTryCompileExec1251594905.dir/build
+gmake[1]: entrant dans le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »
+/usr/bin/cmake -E cmake_progress_report /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec1251594905.dir/CheckFunctionExists.c.o
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=connect   -o CMakeFiles/cmTryCompileExec1251594905.dir/CheckFunctionExists.c.o   -c /usr/share/cmake/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec1251594905
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec1251594905.dir/link.txt --verbose=1
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=connect    CMakeFiles/cmTryCompileExec1251594905.dir/CheckFunctionExists.c.o  -o cmTryCompileExec1251594905 -rdynamic 
+gmake[1]: quittant le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »
+
+
+Determining if the function remove exists passed with the following output:
+Change Dir: /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3070587336/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3070587336.dir/build.make CMakeFiles/cmTryCompileExec3070587336.dir/build
+gmake[1]: entrant dans le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »
+/usr/bin/cmake -E cmake_progress_report /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3070587336.dir/CheckFunctionExists.c.o
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=remove   -o CMakeFiles/cmTryCompileExec3070587336.dir/CheckFunctionExists.c.o   -c /usr/share/cmake/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec3070587336
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3070587336.dir/link.txt --verbose=1
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=remove    CMakeFiles/cmTryCompileExec3070587336.dir/CheckFunctionExists.c.o  -o cmTryCompileExec3070587336 -rdynamic 
+gmake[1]: quittant le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »
+
+
+Determining if the function shmat exists passed with the following output:
+Change Dir: /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec772748252/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec772748252.dir/build.make CMakeFiles/cmTryCompileExec772748252.dir/build
+gmake[1]: entrant dans le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »
+/usr/bin/cmake -E cmake_progress_report /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec772748252.dir/CheckFunctionExists.c.o
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=shmat   -o CMakeFiles/cmTryCompileExec772748252.dir/CheckFunctionExists.c.o   -c /usr/share/cmake/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec772748252
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec772748252.dir/link.txt --verbose=1
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=shmat    CMakeFiles/cmTryCompileExec772748252.dir/CheckFunctionExists.c.o  -o cmTryCompileExec772748252 -rdynamic 
+gmake[1]: quittant le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »
+
+
+Determining if the function IceConnectionNumber exists in the ICE passed with the following output:
+Change Dir: /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp
+
+Run Build Command:/usr/bin/gmake "cmTryCompileExec3928486590/fast"
+/usr/bin/gmake -f CMakeFiles/cmTryCompileExec3928486590.dir/build.make CMakeFiles/cmTryCompileExec3928486590.dir/build
+gmake[1]: entrant dans le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »
+/usr/bin/cmake -E cmake_progress_report /user/3/teughelr/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp/CMakeFiles 1
+Building C object CMakeFiles/cmTryCompileExec3928486590.dir/CheckFunctionExists.c.o
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=IceConnectionNumber   -o CMakeFiles/cmTryCompileExec3928486590.dir/CheckFunctionExists.c.o   -c /usr/share/cmake/Modules/CheckFunctionExists.c
+Linking C executable cmTryCompileExec3928486590
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTryCompileExec3928486590.dir/link.txt --verbose=1
+/opt/gcc-4.9.3/bin/gcc   -DCHECK_FUNCTION_EXISTS=IceConnectionNumber    CMakeFiles/cmTryCompileExec3928486590.dir/CheckFunctionExists.c.o  -o cmTryCompileExec3928486590 -rdynamic -lICE 
+gmake[1]: quittant le répertoire « /user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/build/CMakeFiles/CMakeTmp »
+
+
