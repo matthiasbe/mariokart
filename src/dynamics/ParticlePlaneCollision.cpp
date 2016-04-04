@@ -31,9 +31,22 @@ void ParticlePlaneCollision::do_solveCollision()
     glm::vec3 particlePosition = m_particle->getPosition();
     glm::vec3 particleVelocity = m_particle->getVelocity();
     
-    float dPP = std::min((abs( dot( particlePosition, normale ) - d ) - r), 0.0f);
+    //Compute interpenetration distance
+    glm::vec3 p = d*normale;
+    float d2plane = dot(particlePosition - p, normale);
+    float interpenetrationDist = r - d2plane;
+
     
-    //m_particle->setPosition(particlePosition - (dPP - r)*normale);
+    m_particle->setPosition(particlePosition - (d2plane - r)*normale);
+    
+    m_particle->setVelocity(particleVelocity - (1.0f + m_restitution)*dot(particleVelocity, normale)*normale);
+    
+    /*float dPP = std::min((abs( dot( particlePosition, normale ) - d ) - r), 0.0f);
+    
+    float e = 2.0;
+    
+    m_particle->setPosition(particlePosition - (dPP - r)*normale);
+    m_particle->setVelocity(particleVelocity - (1 + e)*dot(particleVelocity, normale)*normale);*/
     
 }
 
@@ -67,9 +80,15 @@ bool testParticlePlane(const ParticlePtr &particle, const PlanePtr &plane)
     float r = particle->getRadius();
     glm::vec3 normale = plane->normal();
     float d = plane->distanceToOrigin();
+    glm::vec3 p = d*normale;
     glm::vec3 particlePosition = particle->getPosition();
     
-    if (abs( dot( particlePosition, normale ) - d ) <= r) {
+    float d2plane = dot(particlePosition - p, normale);
+    if (d2plane < 0) {
+        d2plane = -d2plane;
+    }
+    
+    if (d2plane <= r) {
         return true;
     } else {
         return false;
