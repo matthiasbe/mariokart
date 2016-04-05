@@ -26,7 +26,7 @@ ParticleRenderable::ParticleRenderable(ShaderProgramPtr shaderProgram, ParticleP
     
     glm::vec3 faceNormal(1,0,0);
     
-    //Face du haut
+    /*//Face du haut
     m_positions.push_back(glm::vec3(0.0, largeur/2.0, 0.0));
     m_positions.push_back(glm::vec3(longueur, largeur/2.0, 0.0));
     m_positions.push_back(glm::vec3(0.0, -largeur/2.0, 0.0));
@@ -146,11 +146,11 @@ ParticleRenderable::ParticleRenderable(ShaderProgramPtr shaderProgram, ParticleP
     m_normals.push_back(faceNormal);
     m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
     m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
+    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));*/
     
     glm::vec3 center(0.0, 0.0, 0.0);
 
-    /*for (int i = 0; i < thetaStep; ++i) {
+    for (int i = 0; i < thetaStep; ++i) {
         for (int j = 0; j < phiStep; ++j) {
             double curr_theta = i*(2.0*M_PI/(double)thetaStep);
             double curr_phi = j*(M_PI/(double)phiStep);
@@ -190,7 +190,7 @@ ParticleRenderable::ParticleRenderable(ShaderProgramPtr shaderProgram, ParticleP
             m_colors.push_back( glm::vec4(0.0,0.0,1.0,1.0) );
             m_colors.push_back( glm::vec4(0.0,0.0,1.0,1.0) );
         }
-    }*/
+    }
 
     //Create buffers
     glGenBuffers(1, &m_pBuffer); //vertices

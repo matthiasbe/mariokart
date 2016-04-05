@@ -1,4 +1,5 @@
 #include "./../../include/dynamics/ParticlePlaneCollision.hpp"
+#include "../../extlib/glm-0.9.7.1/glm/gtx/norm.hpp"
 #include <algorithm>    // std::min
 #include <stdlib.h>
 
@@ -88,7 +89,19 @@ bool testParticlePlane(const ParticlePtr &particle, const PlanePtr &plane)
         d2plane = -d2plane;
     }
     
-    if (d2plane <= r) {
+    glm::vec3 col = normale;
+    float x = col.x;
+    float y = col.y;
+    col.x = -y;
+    col.y = x;
+    
+    glm::normalize(col);
+    glm::vec3 max = plane->getPoint() + (plane->getLongueur()*col);
+    
+    float d1 = glm::distance(max, particlePosition);
+    float d2 = glm::distance(plane->getPoint(), particlePosition);
+    
+    if (d2plane <= r && d1 < plane->getLongueur() && d2 < plane->getLongueur()) {
         return true;
     } else {
         return false;
