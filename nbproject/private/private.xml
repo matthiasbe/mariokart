@@ -10,8 +10,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/include/Kart.hpp</file>
-            <file>file:/user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/src/Kart.cpp</file>
+            <file>file:/user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/src/dynamics/ParticlePlaneCollision.cpp</file>
+            <file>file:/user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/include/dynamics/Particle.hpp</file>
+            <file>file:/user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/src/Plane.cpp</file>
+            <file>file:/user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/include/dynamics/ParticlePlaneCollision.hpp</file>
+            <file>file:/user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/include/Plane.hpp</file>
+            <file>file:/user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/src/dynamics/Particle.cpp</file>
+            <file>file:/user/3/.base/teughelr/home/Travaux/Graphic3D/MarioKart/mariokart/src/practical_05_scene.cpp</file>
         </group>
     </open-files>
 </project-private>
