@@ -11,4 +11,6 @@ void practical05_springs(Viewer& viewer, DynamicSystemPtr& system, DynamicSystem
 void practical05_collisions(Viewer& viewer, DynamicSystemPtr& system, DynamicSystemRenderablePtr& systemRenderable);
 void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSystemRenderablePtr& systemRenderable);
 
+void dessiner_circuit(glm::vec3 *points, float h, glm::vec4 color, ShaderProgramPtr flatShader, DynamicSystemRenderablePtr& systemRenderable, DynamicSystemPtr& system);
+
 #endif 

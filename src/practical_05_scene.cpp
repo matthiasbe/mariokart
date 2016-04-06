@@ -16,6 +16,11 @@
 #include "../include/dynamics/SpringForceFieldRenderable.hpp"
 #include "../include/dynamics/SpringListRenderable.hpp"
 #include "../include/dynamics/ControlledForceFieldRenderable.hpp"
+#include <vector>
+using namespace std;
+#include <iostream>
+
+
 
 void initialize_practical_05_scene( Viewer& viewer )
 {
@@ -275,116 +280,124 @@ void initialize_practical_05_scene( Viewer& viewer )
     system->addForceField( gravityForceField );
 }*/
 
-void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSystemRenderablePtr& systemRenderable)
-{
+void tracer_rectangle(glm::vec3 p1, glm::vec3 p2, float h, glm::vec4 color, ShaderProgramPtr flatShader, DynamicSystemRenderablePtr& systemRenderable, DynamicSystemPtr& system) {
+    glm::vec3 planeNormal, planePoint;
+    glm::vec3 x1, x2, x3, x4;
+    float l;
+
+    planeNormal = p1 - p2;
+    planeNormal = glm::normalize(glm::vec3(-planeNormal.y, planeNormal.x, planeNormal.z));
+    planePoint = p1;
+    l = glm::distance(p1, p2);
+    PlanePtr p0 = std::make_shared<Plane>(planeNormal, planePoint, l);
+    system->addPlaneObstacle(p0);
+    
+    planeNormal = glm::normalize(glm::vec3(-planeNormal.x, -planeNormal.y, -planeNormal.z));
+    PlanePtr p23 = std::make_shared<Plane>(planeNormal, p2, l);
+    system->addPlaneObstacle(p23);
+
+    x1 = p1;
+    x2 = glm::vec3(p1.x, p1.y, h);
+    x3 = glm::vec3(p2.x, p2.y, h);
+    x4 = p2;
+    PlaneRenderablePtr p1Renderable = std::make_shared<QuadRenderable>(flatShader, x1, x2, x3, x4, color);
+    HierarchicalRenderable::addChild(systemRenderable, p1Renderable);
+}
+
+void dessiner_circuit(vector<glm::vec3> points, float h, glm::vec4 color, ShaderProgramPtr flatShader, DynamicSystemRenderablePtr& systemRenderable, DynamicSystemPtr& system) {
+    for (int i = 0; i < points.size()-1; i++) {
+        tracer_rectangle(points[i], points[i + 1], h, color, flatShader, systemRenderable, system);
+    }
+    tracer_rectangle(points[points.size()-1], points[0], h, color, flatShader, systemRenderable, system);
+}
+
+void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSystemRenderablePtr& systemRenderable) {
     //Initialize a shader for the following renderables
-    ShaderProgramPtr flatShader = std::make_shared<ShaderProgram>("../shaders/flatVertex.glsl","../shaders/flatFragment.glsl");
-    viewer.addShaderProgram( flatShader );
+    ShaderProgramPtr flatShader = std::make_shared<ShaderProgram>("../shaders/flatVertex.glsl", "../shaders/flatFragment.glsl");
+    viewer.addShaderProgram(flatShader);
 
     //Position the camera
-    viewer.getCamera().setViewMatrix( glm::lookAt( glm::vec3(0,0,50), glm::vec3(0,0,0), glm::vec3(0,1,0)));
+    viewer.getCamera().setViewMatrix(glm::lookAt(glm::vec3(0, 0, 50), glm::vec3(0, 20, 0), glm::vec3(0, 1, 0)));
 
     //Initialize two particles with position, velocity, mass and radius and add it to the system
-    glm::vec3 px(0.0,0.0,0.0),pv(0.0,0.0,0.0);
+    glm::vec3 px(0.0, 0.0, 0.0),pv(0.0,0.0,0.0);
     float pm=1.0, pr=1.0;
     px = glm::vec3(0.0,0.0,1.0);
     ParticlePtr mobile = std::make_shared<Particle>( px, pv, pm, pr);
     system->addParticle( mobile );
-    px = glm::vec3(0.0,5.0,1.0);
+    /*px = glm::vec3(0.0,5.0,1.0);
     ParticlePtr other = std::make_shared<Particle>( px, pv, pm, pr);
-    system->addParticle( other );
+    system->addParticle( other );*/
 
     //Create a particleRenderable for each particle of the system
     //Add them to the system renderable
     ParticleRenderablePtr mobileRenderable = std::make_shared<ParticleRenderable>( flatShader, mobile );
     HierarchicalRenderable::addChild(systemRenderable, mobileRenderable);
-    ParticleRenderablePtr otherRenderable = std::make_shared<ParticleRenderable>( flatShader, other );
-    HierarchicalRenderable::addChild(systemRenderable, otherRenderable);
+    /*ParticleRenderablePtr otherRenderable = std::make_shared<ParticleRenderable>( flatShader, other );
+    HierarchicalRenderable::addChild(systemRenderable, otherRenderable);*/
 
-    //Initialize four planes to create walls arround the particles
-    /*glm::vec3 planeNormal, planePoint;
-    planeNormal = glm::vec3(-1,0,0);
-    planePoint = glm::vec3(10,0,0);
-    PlanePtr p0 = std::make_shared<Plane>( planeNormal, planePoint);
-    system->addPlaneObstacle( p0 );
-
-    planeNormal = glm::vec3(1,0,0);
-    planePoint = glm::vec3(-10,0,0);
-    PlanePtr p1 = std::make_shared<Plane>( planeNormal, planePoint);
-    system->addPlaneObstacle( p1 );
-
-    planeNormal = glm::vec3(0,-1,0);
-    planePoint = glm::vec3(0,10,0);
-    PlanePtr p2 = std::make_shared<Plane>( planeNormal, planePoint);
-    system->addPlaneObstacle( p2 );
-
-    planeNormal = glm::vec3(0,1,0);
-    planePoint = glm::vec3(0,-10,0);
-    PlanePtr p3 = std::make_shared<Plane>( planeNormal, planePoint);
-    system->addPlaneObstacle( p3 );
-
-    planeNormal = glm::vec3(0,0,1);
-    planePoint = glm::vec3(0,0,0);
-    PlanePtr floor = std::make_shared<Plane>( planeNormal, planePoint);
-    system->addPlaneObstacle( floor );
-
-    //Create  plane renderables to display each obstacle
-    //Add them to the system renderable
     glm::vec3 x1, x2, x3, x4;
     glm::vec4 color;
-    x1 = glm::vec3( 10, 10,5);
-    x2 = glm::vec3( 10, 10,0);
-    x3 = glm::vec3( 10,-10,0);
-    x4 = glm::vec3( 10,-10,5);
-    color = glm::vec4( 0.4, 0.2, 0.2, 1.0);
-    PlaneRenderablePtr p1Renderable = std::make_shared<QuadRenderable>( flatShader, x1, x2, x3, x4, color);
-    HierarchicalRenderable::addChild(systemRenderable, p1Renderable);
-
-    x1 = glm::vec3( -10, 10,5);
-    x2 = glm::vec3( -10, 10,0);
-    x3 = glm::vec3( 10, 10,0);
-    x4 = glm::vec3( 10, 10,5);
-    color = glm::vec4( 0.4, 0.2, 0.2, 1.0);
-    PlaneRenderablePtr p2Renderable = std::make_shared<QuadRenderable>( flatShader, x1, x2, x3, x4, color);
-    HierarchicalRenderable::addChild(systemRenderable, p2Renderable);
-
-    x1 = glm::vec3( -10, -10,5);
-    x2 = glm::vec3( -10, -10,0);
-    x3 = glm::vec3( -10,10,0);
-    x4 = glm::vec3( -10,10,5);
-    color = glm::vec4( 0.2, 0.4, 0.4, 1.0 );
-    PlaneRenderablePtr p3Renderable = std::make_shared<QuadRenderable>( flatShader, x1, x2, x3, x4, color);
-    HierarchicalRenderable::addChild(systemRenderable, p3Renderable);
-
-    x1 = glm::vec3( 10, -10,5);
-    x2 = glm::vec3( 10, -10,0);
-    x3 = glm::vec3( -10,-10,0);
-    x4 = glm::vec3( -10,-10,5);
-    color = glm::vec4(0.2, 0.4, 0.4, 1.0);
-    PlaneRenderablePtr p4Renderable = std::make_shared<QuadRenderable>( flatShader, x1, x2, x3, x4, color);
-    HierarchicalRenderable::addChild(systemRenderable, p4Renderable);*/
     
-    
-    glm::vec3 planeNormal, planePoint;
-    glm::vec3 x1, x2, x3, x4;
-    glm::vec4 color;
-    float l = 20.0f;
-    
-    planeNormal = glm::vec3(-1,0,0);
-    planePoint = glm::vec3(10,0,0);
-    PlanePtr p0 = std::make_shared<Plane>( planeNormal, planePoint, l);
-    system->addPlaneObstacle( p0 );
-    
-    x1 = glm::vec3( 10, 10,5);
-    x2 = glm::vec3( 10, 10,0);
-    x3 = glm::vec3( 10,-10,0);
-    x4 = glm::vec3( 10,-10,5);
-    color = glm::vec4( 0.4, 0.2, 0.2, 1.0);
-    PlaneRenderablePtr p1Renderable = std::make_shared<QuadRenderable>( flatShader, x1, x2, x3, x4, color);
-    HierarchicalRenderable::addChild(systemRenderable, p1Renderable);
+    //La ligne de départ
+    PlaneRenderablePtr depart[20];
+    for (int j = 0; j < 10; j++) {
+        x1 = glm::vec3(2, j-5, 0);
+        x2 = glm::vec3(2, j-4, 0);
+        x3 = glm::vec3(3, j-4, 0);
+        x4 = glm::vec3(3, j-5, 0);
+        if (j % 2 == 1) {
+            color = glm::vec4(0, 0, 0, 1.0);
+        } else {
+            color = glm::vec4(1, 1, 1, 1.0);
+        }
+        depart[j] = std::make_shared<QuadRenderable>(flatShader, x1, x2, x3, x4, color);
+        HierarchicalRenderable::addChild(systemRenderable, depart[j]);
 
+        x1 = glm::vec3(3, j-5, 0);
+        x2 = glm::vec3(3, j-4, 0);
+        x3 = glm::vec3(4, j-4, 0);
+        x4 = glm::vec3(4, j-5, 0);
+        if (j % 2 == 0) {
+            color = glm::vec4(0, 0, 0, 1.0);
+        } else {
+            color = glm::vec4(1, 1, 1, 1.0);
+        }
+        depart[2*j] = std::make_shared<QuadRenderable>(flatShader, x1, x2, x3, x4, color);
+        HierarchicalRenderable::addChild(systemRenderable, depart[2*j]);
+    }
+    
+    vector<glm::vec3> pointsInterieurs;
+    pointsInterieurs.push_back(glm::vec3(10, 5, 0));
+    pointsInterieurs.push_back(glm::vec3(15, 10, 0));
+    pointsInterieurs.push_back(glm::vec3(15, 20, 0));
+    pointsInterieurs.push_back(glm::vec3(10, 25, 0));
+    pointsInterieurs.push_back(glm::vec3(0, 25, 0));
+    pointsInterieurs.push_back(glm::vec3(-10, 35, 0));
+    pointsInterieurs.push_back(glm::vec3(-25, 35, 0));
+    pointsInterieurs.push_back(glm::vec3(-30, 30, 0));
+    pointsInterieurs.push_back(glm::vec3(-30, 25, 0));
+    pointsInterieurs.push_back(glm::vec3(-10, 5, 0));
+    
+    vector<glm::vec3> pointsExterieurs;
+    pointsExterieurs.push_back(glm::vec3(15, -5, 0));
+    pointsExterieurs.push_back(glm::vec3(25, 5, 0));
+    pointsExterieurs.push_back(glm::vec3(25, 25, 0));
+    pointsExterieurs.push_back(glm::vec3(15, 35, 0));
+    pointsExterieurs.push_back(glm::vec3(5, 35, 0));
+    pointsExterieurs.push_back(glm::vec3(-5, 45, 0));
+    pointsExterieurs.push_back(glm::vec3(-30, 45, 0));
+    pointsExterieurs.push_back(glm::vec3(-40, 35, 0));
+    pointsExterieurs.push_back(glm::vec3(-40, 20, 0));
+    pointsExterieurs.push_back(glm::vec3(-15, -5, 0));
+    
+    float h = 1.0;
+    color = glm::vec4(1, 0, 0, 1.0);
+    dessiner_circuit(pointsInterieurs, h, color, flatShader, systemRenderable, system);
+    dessiner_circuit(pointsExterieurs, h, color, flatShader, systemRenderable, system);
+    
     //Initialize a force field that apply only to the mobile particle
-    glm::vec3 nullForce(0.0,0.0,0.0);
+    glm::vec3 nullForce(0.0, 0.0, 0.0);
     std::vector<ParticlePtr> vParticle;
     vParticle.push_back(mobile);
     ConstantForceFieldPtr force = std::make_shared<ConstantForceField>(vParticle, nullForce);
