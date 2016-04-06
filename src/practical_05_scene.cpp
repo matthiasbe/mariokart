@@ -49,7 +49,7 @@ void initialize_practical_05_scene( Viewer& viewer )
     viewer.startAnimation();
 }
 
-void practical05_particles(Viewer& viewer, DynamicSystemPtr& system, DynamicSystemRenderablePtr &systemRenderable)
+/*void practical05_particles(Viewer& viewer, DynamicSystemPtr& system, DynamicSystemRenderablePtr &systemRenderable)
 {
     //Position the camera
     viewer.getCamera().setViewMatrix( glm::lookAt( glm::vec3( 0, -6, 0 ), glm::vec3(0,0,0), glm::vec3(0,0,1)));
@@ -96,10 +96,10 @@ void practical05_particles(Viewer& viewer, DynamicSystemPtr& system, DynamicSyst
         ParticleRenderablePtr particleRenderable2 = std::make_shared<ParticleRenderable>(flatShader, particle2);
         HierarchicalRenderable::addChild( systemRenderable, particleRenderable2 );
     }
-}
+}*/
 
 
-void practical05_springs(Viewer& viewer, DynamicSystemPtr& system, DynamicSystemRenderablePtr &systemRenderable)
+/*void practical05_springs(Viewer& viewer, DynamicSystemPtr& system, DynamicSystemRenderablePtr &systemRenderable)
 {
     //Position the camera
     viewer.getCamera().setViewMatrix( glm::lookAt( glm::vec3( -10, 0, 2 ), glm::vec3(0,0,0), glm::vec3(0,0,1)));
@@ -194,9 +194,9 @@ void practical05_springs(Viewer& viewer, DynamicSystemPtr& system, DynamicSystem
     //Display gravity
     ConstantForceFieldRenderablePtr gravityRenderable = std::make_shared<ConstantForceFieldRenderable>(flatShader, gravityForceField);
     HierarchicalRenderable::addChild( systemRenderable, gravityRenderable );
-}
+}*/
 
-void practical05_collisions(Viewer& viewer, DynamicSystemPtr& system, DynamicSystemRenderablePtr &systemRenderable)
+/*void practical05_collisions(Viewer& viewer, DynamicSystemPtr& system, DynamicSystemRenderablePtr &systemRenderable)
 {
     //Position the camera
     viewer.getCamera().setViewMatrix( glm::lookAt( glm::vec3( 0, 2, 2 ), glm::vec3(0,0,0), glm::vec3(0,0,1)));
@@ -273,7 +273,7 @@ void practical05_collisions(Viewer& viewer, DynamicSystemPtr& system, DynamicSys
     //Add it to the system as a force field
     ConstantForceFieldPtr gravityForceField = std::make_shared<ConstantForceField>(system->getParticles(), glm::vec3{0,0,-10} );
     system->addForceField( gravityForceField );
-}
+}*/
 
 void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSystemRenderablePtr& systemRenderable)
 {
@@ -302,7 +302,7 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
     HierarchicalRenderable::addChild(systemRenderable, otherRenderable);
 
     //Initialize four planes to create walls arround the particles
-    glm::vec3 planeNormal, planePoint;
+    /*glm::vec3 planeNormal, planePoint;
     planeNormal = glm::vec3(-1,0,0);
     planePoint = glm::vec3(10,0,0);
     PlanePtr p0 = std::make_shared<Plane>( planeNormal, planePoint);
@@ -362,7 +362,26 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
     x4 = glm::vec3( -10,-10,5);
     color = glm::vec4(0.2, 0.4, 0.4, 1.0);
     PlaneRenderablePtr p4Renderable = std::make_shared<QuadRenderable>( flatShader, x1, x2, x3, x4, color);
-    HierarchicalRenderable::addChild(systemRenderable, p4Renderable);
+    HierarchicalRenderable::addChild(systemRenderable, p4Renderable);*/
+    
+    
+    glm::vec3 planeNormal, planePoint;
+    glm::vec3 x1, x2, x3, x4;
+    glm::vec4 color;
+    float l = 20.0f;
+    
+    planeNormal = glm::vec3(-1,0,0);
+    planePoint = glm::vec3(10,0,0);
+    PlanePtr p0 = std::make_shared<Plane>( planeNormal, planePoint, l);
+    system->addPlaneObstacle( p0 );
+    
+    x1 = glm::vec3( 10, 10,5);
+    x2 = glm::vec3( 10, 10,0);
+    x3 = glm::vec3( 10,-10,0);
+    x4 = glm::vec3( 10,-10,5);
+    color = glm::vec4( 0.4, 0.2, 0.2, 1.0);
+    PlaneRenderablePtr p1Renderable = std::make_shared<QuadRenderable>( flatShader, x1, x2, x3, x4, color);
+    HierarchicalRenderable::addChild(systemRenderable, p1Renderable);
 
     //Initialize a force field that apply only to the mobile particle
     glm::vec3 nullForce(0.0,0.0,0.0);
