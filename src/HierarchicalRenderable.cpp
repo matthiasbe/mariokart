@@ -107,12 +107,3 @@ std::vector< HierarchicalRenderablePtr > & HierarchicalRenderable::getChildren()
 {
     return m_children;
 }
-/*void HierarchicalRenderable::keyPressedEvent(sf::Event& e){
-    for(size_t i=0; i<m_children.size(); ++i)
-        m_children[i]->keyPressedEvent(e);
-}
-void HierarchicalRenderable::keyReleasedEvent(sf::Event& e)
-{
-    for(size_t i=0; i<m_children.size(); ++i)
-        m_children[i]->keyReleasedEvent(e);
-}*/

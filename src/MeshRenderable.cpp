@@ -95,3 +95,13 @@ MeshRenderable::~MeshRenderable()
     glcheck(glDeleteBuffers(1, &m_nBuffer));
     glcheck(glDeleteBuffers(1, &m_iBuffer));
 }
+void MeshRenderable::do_keyPressedEvent(sf::Event& e){
+    for(size_t i=0; i<getChildren().size(); ++i)
+        getChildren()[i]->keyPressedEvent(e);
+}
+void MeshRenderable::do_keyReleasedEvent(sf::Event& e)
+{
+    for(size_t i=0; i<getChildren().size(); ++i)
+        getChildren()[i]->keyReleasedEvent(e);
+    //keyReleasedEvent(e);
+}

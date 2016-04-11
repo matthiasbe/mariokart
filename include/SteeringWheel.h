@@ -18,7 +18,6 @@ public:
 private:
     void animate();
     void do_keyPressedEvent(sf::Event& e);
-
     void do_keyReleasedEvent(sf::Event& e);
 };
 typedef std::shared_ptr<SteringWheel> SteringWheelPtr;

@@ -19,12 +19,28 @@ void SteringWheel::do_keyPressedEvent(sf::Event& e){
     if( e.key.code == sf::Keyboard::Left ){
         setLocalTransform(GeometricTransformation(
             glm::vec3{0, 0, 0},
-            glm::quat(glm::vec3(0,0,1.0f)),
+            glm::quat(glm::vec3(0,1.0f,0)),
             glm::vec3{1, 1, 1}).toMatrix());
     }
-    printf("lol");
+        if( e.key.code == sf::Keyboard::Right ){
+        setLocalTransform(GeometricTransformation(
+            glm::vec3{0, 0, 0},
+            glm::quat(glm::vec3(0,-1.0f,0)),
+            glm::vec3{1, 1, 1}).toMatrix());
+    }
 }
 
 void SteringWheel::do_keyReleasedEvent(sf::Event& e){
-
+    if( e.key.code == sf::Keyboard::Left ){
+        setLocalTransform(GeometricTransformation(
+            glm::vec3{0, 0, 0},
+            glm::quat(glm::vec3(0,0,0)),
+            glm::vec3{1, 1, 1}).toMatrix());
+    }
+        if( e.key.code == sf::Keyboard::Right ){
+        setLocalTransform(GeometricTransformation(
+            glm::vec3{0, 0, 0},
+            glm::quat(glm::vec3(0,0,0)),
+            glm::vec3{1, 1, 1}).toMatrix());
+    }
 }
