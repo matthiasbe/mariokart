@@ -16,11 +16,13 @@
 #include "../include/dynamics/SpringForceFieldRenderable.hpp"
 #include "../include/dynamics/SpringListRenderable.hpp"
 #include "../include/dynamics/ControlledForceFieldRenderable.hpp"
+#include "../include/MeshRenderable.hpp"
 #include <vector>
 using namespace std;
 #include <iostream>
 
 
+void createKart(ParticleRenderablePtr root,ShaderProgramPtr program);
 
 void initialize_practical_05_scene( Viewer& viewer )
 {
@@ -333,6 +335,7 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
     //Add them to the system renderable
     ParticleRenderablePtr mobileRenderable = std::make_shared<ParticleRenderable>( flatShader, mobile );
     HierarchicalRenderable::addChild(systemRenderable, mobileRenderable);
+    createKart(mobileRenderable,flatShader);
     /*ParticleRenderablePtr otherRenderable = std::make_shared<ParticleRenderable>( flatShader, other );
     HierarchicalRenderable::addChild(systemRenderable, otherRenderable);*/
 
@@ -416,4 +419,19 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
     //Activate collision and set the restitution coefficient to 1.0
     system->setCollisionsDetection(true);
     system->setRestitution(1.0f);
+}
+
+void createKart(ParticleRenderablePtr root,ShaderProgramPtr program){
+    
+    glm::vec3 p1 = glm::vec3(0,0,0);
+    glm::vec3 p2 = glm::vec3(0,0,1);
+    glm::vec3 p3 = glm::vec3(0,1,1);
+    glm::vec3 p4 = glm::vec3(0,1,0);
+    glm::vec4 color = glm::vec4(0,1,1,1);
+    PlaneRenderablePtr lol = std::make_shared<QuadRenderable>(program,p1,p2,p3,p4,color); 
+    HierarchicalCylinderRenderablePtr face = std::make_shared<HierarchicalCylinderRenderable>(program);
+    face->setParentTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat{1, 0, 0, 0},glm::vec3{1, 1, 1}).toMatrix());
+    face->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat{1, 0, 0, 0},glm::vec3{1, 1, 1}).toMatrix());
+    HierarchicalRenderable::addChild(root,face);
+    
 }

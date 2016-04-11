@@ -8,7 +8,9 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <GL/glew.h>
 #include <memory>
+using namespace glm;
 
+quat RotationBetweenVectors(vec3 start, vec3 dest);
 
 ParticleRenderable::ParticleRenderable(ShaderProgramPtr shaderProgram, ParticlePtr particle) :
     HierarchicalRenderable(shaderProgram),
@@ -150,7 +152,7 @@ ParticleRenderable::ParticleRenderable(ShaderProgramPtr shaderProgram, ParticleP
     
     glm::vec3 center(0.0, 0.0, 0.0);
 
-    for (int i = 0; i < thetaStep; ++i) {
+    /*for (int i = 0; i < thetaStep; ++i) {
         for (int j = 0; j < phiStep; ++j) {
             double curr_theta = i*(2.0*M_PI/(double)thetaStep);
             double curr_phi = j*(M_PI/(double)phiStep);
@@ -190,7 +192,7 @@ ParticleRenderable::ParticleRenderable(ShaderProgramPtr shaderProgram, ParticleP
             m_colors.push_back( glm::vec4(0.0,0.0,1.0,1.0) );
             m_colors.push_back( glm::vec4(0.0,0.0,1.0,1.0) );
         }
-    }
+    }*/
 
     //Create buffers
     glGenBuffers(1, &m_pBuffer); //vertices
@@ -213,7 +215,13 @@ void ParticleRenderable::do_draw()
     const glm::vec3& pPosition = m_particle->getPosition();
     glm::mat4 scale = glm::scale(glm::mat4(1.0), glm::vec3(pRadius));
     glm::mat4 translate = glm::translate(glm::mat4(1.0), glm::vec3(pPosition));
-    setLocalTransform(translate*scale);
+    //here we get quaternion from velocity:
+
+    glm::vec3 dir = normalize(m_particle->getVelocity());
+    //float x = dir;
+    vec3 top = vec3(0,1,0);
+    vec3 myQuat = normalize(cross(top,dir));
+    setParentTransform(GeometricTransformation(pPosition,RotationBetweenVectors(top,dir),glm::vec3(1.0f)).toMatrix());
 
     //Draw geometric data
     int positionLocation = m_shaderProgram->getAttributeLocation("vPosition");
@@ -271,4 +279,21 @@ ParticleRenderable::~ParticleRenderable()
     glcheck(glDeleteBuffers(1, &m_pBuffer));
     glcheck(glDeleteBuffers(1, &m_cBuffer));
     glcheck(glDeleteBuffers(1, &m_nBuffer));
+}
+quat RotationBetweenVectors(vec3 start, vec3 dest){
+	start = normalize(start);
+	dest = normalize(dest);
+
+	float cosTheta = dot(start, dest);
+	vec3 rotationAxis = cross(start, dest);
+
+	float s = sqrt( (1+cosTheta)*2 );
+	float invs = 1 / s;
+	return quat(
+		s * 0.5f, 
+		rotationAxis.x * invs,
+		rotationAxis.y * invs,
+		rotationAxis.z * invs
+	);
+
 }
