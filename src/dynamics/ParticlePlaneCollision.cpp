@@ -42,13 +42,6 @@ void ParticlePlaneCollision::do_solveCollision()
     
     m_particle->setVelocity(particleVelocity - (1.0f + m_restitution)*dot(particleVelocity, normale)*normale);
     
-    /*float dPP = std::min((abs( dot( particlePosition, normale ) - d ) - r), 0.0f);
-    
-    float e = 2.0;
-    
-    m_particle->setPosition(particlePosition - (dPP - r)*normale);
-    m_particle->setVelocity(particleVelocity - (1 + e)*dot(particleVelocity, normale)*normale);*/
-    
 }
 
 

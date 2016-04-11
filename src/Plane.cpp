@@ -1,6 +1,13 @@
 #include "./../include/Plane.hpp"
 #include <glm/gtc/matrix_access.hpp>
 
+/*		         |				x infini en z
+ *  x            |         x	
+ * point       normal			
+ *  <---------------------->	
+ *           longueur
+ */
+
 Plane::Plane(
         const glm::vec3& normal,
         const glm::vec3& point,

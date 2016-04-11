@@ -283,21 +283,22 @@ void initialize_practical_05_scene( Viewer& viewer )
     system->addForceField( gravityForceField );
 }*/
 
-void tracer_rectangle(glm::vec3 p1, glm::vec3 p2, float h, glm::vec4 color, ShaderProgramPtr flatShader, DynamicSystemRenderablePtr& systemRenderable, DynamicSystemPtr& system) {
-    glm::vec3 planeNormal, planePoint;
+void tracer_rectangle(glm::vec3 p1, glm::vec3 p2, float h, glm::vec4 color, ShaderProgramPtr flatShader, DynamicSystemRenderablePtr& systemRenderable, DynamicSystemPtr& system, bool interior) {
+    glm::vec3 planeNormal, planePoint, vecteurDirecteur;
     glm::vec3 x1, x2, x3, x4;
     float l;
 
-    planeNormal = p1 - p2;
-    planeNormal = glm::normalize(glm::vec3(-planeNormal.y, planeNormal.x, planeNormal.z));
-    planePoint = p1;
+    vecteurDirecteur = p1 - p2;
+    planeNormal = glm::normalize(glm::vec3(-vecteurDirecteur.y, vecteurDirecteur.x, vecteurDirecteur.z));
     l = glm::distance(p1, p2);
-    PlanePtr p0 = std::make_shared<Plane>(planeNormal, planePoint, l);
-    system->addPlaneObstacle(p0);
     
-    planeNormal = glm::normalize(glm::vec3(-planeNormal.x, -planeNormal.y, -planeNormal.z));
-    PlanePtr p23 = std::make_shared<Plane>(planeNormal, p2, l);
-    system->addPlaneObstacle(p23);
+    PlanePtr p23 = std::make_shared<Plane>(-planeNormal, p2, l);
+    PlanePtr p0 = std::make_shared<Plane>(planeNormal, p1, l);
+	if(interior) {
+		system->addPlaneObstacle(p23);
+	} else {
+		system->addPlaneObstacle(p0);
+	}
 
     x1 = p1;
     x2 = glm::vec3(p1.x, p1.y, h);
@@ -307,11 +308,11 @@ void tracer_rectangle(glm::vec3 p1, glm::vec3 p2, float h, glm::vec4 color, Shad
     HierarchicalRenderable::addChild(systemRenderable, p1Renderable);
 }
 
-void dessiner_circuit(vector<glm::vec3> points, float h, glm::vec4 color, ShaderProgramPtr flatShader, DynamicSystemRenderablePtr& systemRenderable, DynamicSystemPtr& system) {
+void dessiner_circuit(vector<glm::vec3> points, float h, glm::vec4 color, ShaderProgramPtr flatShader, DynamicSystemRenderablePtr& systemRenderable, DynamicSystemPtr& system, bool interior) {
     for (int i = 0; i < points.size()-1; i++) {
-        tracer_rectangle(points[i], points[i + 1], h, color, flatShader, systemRenderable, system);
+        tracer_rectangle(points[i], points[i + 1], h, color, flatShader, systemRenderable, system, interior);
     }
-    tracer_rectangle(points[points.size()-1], points[0], h, color, flatShader, systemRenderable, system);
+    tracer_rectangle(points[points.size()-1], points[0], h, color, flatShader, systemRenderable, system, interior);
 }
 
 void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSystemRenderablePtr& systemRenderable) {
@@ -398,8 +399,8 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
     
     float h = 1.0;
     color = glm::vec4(1, 0, 0, 1.0);
-    dessiner_circuit(pointsInterieurs, h, color, flatShader, systemRenderable, system);
-    dessiner_circuit(pointsExterieurs, h, color, flatShader, systemRenderable, system);
+    dessiner_circuit(pointsInterieurs, h, color, flatShader, systemRenderable, system, false);
+    dessiner_circuit(pointsExterieurs, h, color, flatShader, systemRenderable, system, true);
     
     //Initialize a force field that apply only to the mobile particle
     glm::vec3 nullForce(0.0, 0.0, 0.0);
