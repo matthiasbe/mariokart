@@ -24,6 +24,7 @@ class ParticleRenderable : public HierarchicalRenderable
          * @param particle The particle to render.
          */
         ParticleRenderable( ShaderProgramPtr program, ParticlePtr particle );
+        ParticlePtr getParticule();
 
     private:
         void do_draw();

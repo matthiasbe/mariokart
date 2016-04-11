@@ -17,12 +17,13 @@
 #include "../include/dynamics/SpringListRenderable.hpp"
 #include "../include/dynamics/ControlledForceFieldRenderable.hpp"
 #include "../include/MeshRenderable.hpp"
+#include "../include/SteeringWheel.h"
 #include <vector>
 using namespace std;
 #include <iostream>
 
 
-void createKart(ParticleRenderablePtr root,ShaderProgramPtr program);
+void createKart(ParticleRenderablePtr root,ShaderProgramPtr program, DynamicSystemPtr& system);
 
 void initialize_practical_05_scene( Viewer& viewer )
 {
@@ -319,7 +320,7 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
     viewer.addShaderProgram(flatShader);
 
     //Position the camera
-    viewer.getCamera().setViewMatrix(glm::lookAt(glm::vec3(0, 0, 50), glm::vec3(0, 20, 0), glm::vec3(0, 1, 0)));
+    viewer.getCamera().setViewMatrix(glm::lookAt(glm::vec3(0, 0, 40), glm::vec3(0, 20, 0), glm::vec3(0, 1, 0)));
 
     //Initialize two particles with position, velocity, mass and radius and add it to the system
     glm::vec3 px(0.0, 0.0, 0.0),pv(0.0,0.0,0.0);
@@ -335,7 +336,8 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
     //Add them to the system renderable
     ParticleRenderablePtr mobileRenderable = std::make_shared<ParticleRenderable>( flatShader, mobile );
     HierarchicalRenderable::addChild(systemRenderable, mobileRenderable);
-    createKart(mobileRenderable,flatShader);
+    createKart(mobileRenderable,flatShader,system);
+    viewer.getCamera().setKart(mobileRenderable);
     /*ParticleRenderablePtr otherRenderable = std::make_shared<ParticleRenderable>( flatShader, other );
     HierarchicalRenderable::addChild(systemRenderable, otherRenderable);*/
 
@@ -421,17 +423,15 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
     system->setRestitution(1.0f);
 }
 
-void createKart(ParticleRenderablePtr root,ShaderProgramPtr program){
-    
-    glm::vec3 p1 = glm::vec3(0,0,0);
-    glm::vec3 p2 = glm::vec3(0,0,1);
-    glm::vec3 p3 = glm::vec3(0,1,1);
-    glm::vec3 p4 = glm::vec3(0,1,0);
-    glm::vec4 color = glm::vec4(0,1,1,1);
-    PlaneRenderablePtr lol = std::make_shared<QuadRenderable>(program,p1,p2,p3,p4,color); 
-    HierarchicalCylinderRenderablePtr face = std::make_shared<HierarchicalCylinderRenderable>(program);
-    face->setParentTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat{1, 0, 0, 0},glm::vec3{1, 1, 1}).toMatrix());
-    face->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat{1, 0, 0, 0},glm::vec3{1, 1, 1}).toMatrix());
-    HierarchicalRenderable::addChild(root,face);
+void createKart(ParticleRenderablePtr root,ShaderProgramPtr program, DynamicSystemPtr& system){
+    MeshRenderablePtr kart = std::make_shared<MeshRenderable>(program,"../meshes/kart.obj");
+    kart->setParentTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat(glm::vec3(1.57f,0,0)),glm::vec3{1, 1, 1}).toMatrix());
+    kart->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat{1, 0, 0, 0},glm::vec3{1, 1, 1}).toMatrix());
+    HierarchicalRenderable::addChild(root,kart);
+
+    SteringWheelPtr volant = std::make_shared<SteringWheel>(program,"../meshes/volant.obj");
+    volant->setParentTransform(GeometricTransformation(glm::vec3{0, 0.7, 0},glm::quat(glm::vec3(1.57f,0,0)),glm::vec3{0.3, 0.3, 0.3}).toMatrix());
+    volant->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat{1, 0, 0, 0},glm::vec3{1, 1, 1}).toMatrix());
+    HierarchicalRenderable::addChild(kart,volant);
     
 }

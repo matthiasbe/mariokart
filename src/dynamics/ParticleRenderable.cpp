@@ -272,7 +272,12 @@ void ParticleRenderable::do_draw()
     }
 }
 
-void ParticleRenderable::do_animate(float time) {}
+ParticlePtr ParticleRenderable::getParticule(){
+    return m_particle;
+}
+
+void ParticleRenderable::do_animate(float time) {
+}
 
 ParticleRenderable::~ParticleRenderable()
 {

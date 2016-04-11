@@ -9,6 +9,9 @@
  */
 
 #include <glm/glm.hpp>
+
+#include "HierarchicalRenderable.hpp"
+#include "dynamics/ParticleRenderable.hpp"
 /**@brief Manage the Camera.
  *
  * We consider a camera to be defined by two 4x4 matrices:
@@ -237,6 +240,7 @@ public:
     ///@}
 
 
+    void setKart(ParticleRenderablePtr kart);
     /** @brief Reaction to mouse displacement.
      *
      * This enumeration specifies the different kind of reaction to a mouse displacement.
@@ -283,6 +287,7 @@ private:
     float m_zfar;
     glm::mat4 m_view;
     glm::mat4 m_projection;
+    ParticlePtr m_kart;
 };
 
 #endif

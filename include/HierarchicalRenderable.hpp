@@ -145,8 +145,9 @@ public :
      * @return A vector of hierarchical renderable shared pointers. */
     std::vector< HierarchicalRenderablePtr > & getChildren();
 
+    //void keyPressedEvent(sf::Event& e);
+    //void keyReleasedEvent(sf::Event& e);
 private:
-
     /**@brief Pointer to the parent renderable.
      *
      * If it has no parent then the pointer value is nullptr.
