@@ -18,6 +18,8 @@
 #include "../include/dynamics/ControlledForceFieldRenderable.hpp"
 #include "../include/MeshRenderable.hpp"
 #include "../include/SteeringWheel.h"
+#include "../include/Wheel.h"
+#include "../include/movingWheel.h"
 #include <vector>
 using namespace std;
 #include <iostream>
@@ -434,5 +436,24 @@ void createKart(ParticleRenderablePtr root,ShaderProgramPtr program, DynamicSyst
     volant->setParentTransform(GeometricTransformation(glm::vec3{0, 0.7, 0},glm::quat(glm::vec3(1.57f,0,0)),glm::vec3{0.3, 0.3, 0.3}).toMatrix());
     volant->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat{1, 0, 0, 0},glm::vec3{1, 1, 1}).toMatrix());
     HierarchicalRenderable::addChild(kart,volant);
+    //right back wheel
+    WheelPtr wheel = std::make_shared<Wheel>(program,"../meshes/wheel.obj",true,root->getParticule());
+    wheel->setParentTransform(GeometricTransformation(glm::vec3{1.3, -0.2, 1.2},glm::quat(glm::vec3(0,3.14f,0)),glm::vec3{0.3, 0.3, 0.3}).toMatrix());
+    wheel->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat(1,0,0,0),glm::vec3{1, 1, 1}).toMatrix());
+    HierarchicalRenderable::addChild(kart,wheel);
     
+    wheel = std::make_shared<Wheel>(program,"../meshes/wheel.obj",false,root->getParticule());
+    wheel->setParentTransform(GeometricTransformation(glm::vec3{-1.3, -0.2, 1.2},glm::quat(glm::vec3(0,0,0)),glm::vec3{0.3, 0.3, 0.3}).toMatrix());
+    wheel->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat(1,0,0,0),glm::vec3{1, 1, 1}).toMatrix());
+    HierarchicalRenderable::addChild(kart,wheel);
+    
+    MovingWheelPtr wheel2 = std::make_shared<MovingWheel>(program,"../meshes/wheel.obj",true,root->getParticule());
+    wheel2->setParentTransform(GeometricTransformation(glm::vec3{1.3, -0.2, -1.2},glm::quat(glm::vec3(0,3.14f,0)),glm::vec3{0.3, 0.3, 0.3}).toMatrix());
+    wheel2->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat(1,0,0,0),glm::vec3{1, 1, 1}).toMatrix());
+    HierarchicalRenderable::addChild(kart,wheel2);
+    
+    wheel2 = std::make_shared<MovingWheel>(program,"../meshes/wheel.obj",false,root->getParticule());
+    wheel2->setParentTransform(GeometricTransformation(glm::vec3{-1.3, -0.2, -1.2},glm::quat(glm::vec3(0,0,0)),glm::vec3{0.3, 0.3, 0.3}).toMatrix());
+    wheel2->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat(1,0,0,0),glm::vec3{1, 1, 1}).toMatrix());
+    HierarchicalRenderable::addChild(kart,wheel2);
 }
