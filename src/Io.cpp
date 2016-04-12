@@ -24,38 +24,39 @@ bool read_obj(const std::string& filename,
 
     if (!ret) 
     {
-        exit(EXIT_FAILURE);
+        return ret;
     }
+
+    positions.clear();
+    triangles.clear();
+    normals.clear();
+    texcoords.clear();
 
     for (size_t i = 0; i < shapes.size(); i++) 
     {
         assert((shapes[i].mesh.indices.size() % 3) == 0);
-        triangles.resize(shapes[i].mesh.indices.size());
-        for (size_t f = 0; f < shapes[i].mesh.indices.size() / 3; f++) 
+        for (size_t f = 0; f < shapes[i].mesh.indices.size(); f++) 
         {
-            triangles[3*f+0] = shapes[i].mesh.indices[3*f+0];
-            triangles[3*f+1] = shapes[i].mesh.indices[3*f+1];
-            triangles[3*f+2] = shapes[i].mesh.indices[3*f+2];
+            triangles.push_back( shapes[i].mesh.indices[f] );
         }
         assert((shapes[i].mesh.positions.size() % 3) == 0);
-        positions.resize(shapes[i].mesh.positions.size()/3);
         for (size_t v = 0; v < shapes[i].mesh.positions.size() / 3; v++) 
         {
-            positions[v] = glm::vec3(shapes[i].mesh.positions[3*v+0], shapes[i].mesh.positions[3*v+1],shapes[i].mesh.positions[3*v+2]);
+            positions.push_back( glm::vec3(shapes[i].mesh.positions[3*v+0], shapes[i].mesh.positions[3*v+1],shapes[i].mesh.positions[3*v+2]) );
         }
 
         assert((shapes[i].mesh.normals.size() % 3) == 0);
-        normals.resize(shapes[i].mesh.normals.size()/3);
         for (size_t n = 0; n < shapes[i].mesh.normals.size() / 3; n++)
         {
-            normals[n] = glm::vec3(shapes[i].mesh.normals[3*n+0], shapes[i].mesh.normals[3*n+1],shapes[i].mesh.normals[3*n+2]);
+            normals.push_back( glm::vec3(shapes[i].mesh.normals[3*n+0], shapes[i].mesh.normals[3*n+1],shapes[i].mesh.normals[3*n+2]) );
         }
 
         assert((shapes[i].mesh.texcoords.size() % 2) == 0);
-        texcoords.resize(shapes[i].mesh.texcoords.size()/2);
         for (size_t t = 0; t < shapes[i].mesh.texcoords.size() / 2; t++)
         {
-            texcoords[t] = glm::vec2(shapes[i].mesh.texcoords[2*t+0], shapes[i].mesh.texcoords[2*t+1]);
+            texcoords.push_back( glm::vec2(shapes[i].mesh.texcoords[2*t+0], shapes[i].mesh.texcoords[2*t+1]) );
         }
     }
+
+    return ret;
 }

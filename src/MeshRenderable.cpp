@@ -68,7 +68,7 @@ void MeshRenderable::do_draw()
 
     //Draw triangles elements
     glcheck(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_iBuffer));
-    glcheck(glDrawElements(GL_TRIANGLES, m_indices.size()*3, GL_UNSIGNED_INT, (void*)0));
+    glcheck(glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, (void*)0));
 
     if(positionLocation != ShaderProgram::null_location)
     {
