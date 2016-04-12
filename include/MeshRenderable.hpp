@@ -1,19 +1,20 @@
 #ifndef MESH_RENDERABLE_HPP
 #define MESH_RENDERABLE_HPP
 
-#include "Renderable.hpp"
+#include "HierarchicalRenderable.hpp"
 
 #include <string>
 #include <vector>
 #include <glm/glm.hpp>
 
-class MeshRenderable : public Renderable
+class MeshRenderable : public HierarchicalRenderable
 {
     public:
         ~MeshRenderable();
         MeshRenderable(ShaderProgramPtr program, const std::string& filename);
-
     private:
+        void do_keyPressedEvent(sf::Event& e);
+        void do_keyReleasedEvent(sf::Event& e);
         void do_draw();
         void do_animate( float time );
 

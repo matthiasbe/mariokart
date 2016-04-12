@@ -24,8 +24,12 @@ class ParticleRenderable : public HierarchicalRenderable
          * @param particle The particle to render.
          */
         ParticleRenderable( ShaderProgramPtr program, ParticlePtr particle );
+        ParticlePtr getParticule();
+
 
     private:
+        void do_keyPressedEvent(sf::Event& e);
+        void do_keyReleasedEvent(sf::Event& e);
         void do_draw();
         void do_animate( float time );
 

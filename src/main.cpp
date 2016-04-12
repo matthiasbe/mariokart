@@ -3,13 +3,13 @@
 
 #include <sstream>
 
-void initialize_practical_07_scene( Viewer& viewer );
+void initialize_practical_05_scene( Viewer& viewer );
 
 int main( int argc, char* argv[] )
 {
     Viewer viewer(1280,720);
 
-    initialize_practical_07_scene( viewer );
+    initialize_practical_05_scene( viewer );
 
     while( viewer.isRunning() )
     {

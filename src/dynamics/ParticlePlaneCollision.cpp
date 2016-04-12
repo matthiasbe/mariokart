@@ -1,4 +1,7 @@
 #include "./../../include/dynamics/ParticlePlaneCollision.hpp"
+#include "../../extlib/glm-0.9.7.1/glm/gtx/norm.hpp"
+#include <algorithm>    // std::min
+#include <stdlib.h>
 
 ParticlePlaneCollision::~ParticlePlaneCollision()
 {}
@@ -22,18 +25,23 @@ void ParticlePlaneCollision::do_solveCollision()
     //Plane::distanceToOrigin(): Return the distance to origin from the plane
     //Plane::normal(): Return the normal of the plane
     //Particle::getRadius(), Particle::getPosition(), Particle::getVelocity(), Particle::setPosition(), Particle::setVelocity()
+    
+    float r = m_particle->getRadius();
+    glm::vec3 normale = m_plane->normal();
+    float d = m_plane->distanceToOrigin();
+    glm::vec3 particlePosition = m_particle->getPosition();
+    glm::vec3 particleVelocity = m_particle->getVelocity();
+    
+    //Compute interpenetration distance
+    glm::vec3 p = d*normale;
+    float d2plane = dot(particlePosition - p, normale);
+    float interpenetrationDist = r - d2plane;
 
-    //Compute particle-plane distance
-    glm::vec3 prev_x = m_particle->getPosition();
-    float distToPlane = glm::dot(prev_x, m_plane->normal())-m_plane->distanceToOrigin();
-    //Project the particle on the plane
-    glm::vec3 new_x = prev_x - (distToPlane-m_particle->getRadius())*m_plane->normal();
-    m_particle->setPosition(new_x);
+    
+    m_particle->setPosition(particlePosition - (d2plane - r)*normale);
+    
+    m_particle->setVelocity(particleVelocity - (1.0f + m_restitution)*dot(particleVelocity, normale)*normale);
 
-    //Compute post-collision velocity
-    glm::vec3 prev_v = m_particle->getVelocity();
-    glm::vec3 new_v = prev_v - (1.0f + m_restitution)*glm::dot(prev_v, m_plane->normal())*m_plane->normal();
-    m_particle->setVelocity(new_v);
 }
 
 
@@ -63,8 +71,36 @@ bool testParticlePlane(const ParticlePtr &particle, const PlanePtr &plane)
     //Plane::distanceToOrigin(): Return the distance to origin from the plane
     //Plane::normal(): Return the normal of the plane
     //Particle::getRadius(), Particle::getPosition()
-
-    //return false;
-    return std::abs( dot( particle->getPosition(), plane->normal() ) - plane->distanceToOrigin() )
-            <= particle->getRadius();
+    
+    float r = particle->getRadius();
+    glm::vec3 normale = plane->normal();
+    float d = plane->distanceToOrigin();
+    glm::vec3 p = d*normale;
+    glm::vec3 particlePosition = particle->getPosition();
+    
+    float d2plane = dot(particlePosition - p, normale);
+    if (d2plane < 0) {
+        d2plane = -d2plane;
+    }
+    
+    glm::vec3 col = normale;
+    float x = col.x;
+    float y = col.y;
+    col.x = -y;
+    col.y = x;
+    
+    glm::normalize(col);
+    glm::vec3 max = plane->getPoint() + (plane->getLongueur()*col);
+    
+    float d1 = glm::distance(max, particlePosition);
+    float d2 = glm::distance(plane->getPoint(), particlePosition);
+    
+    if (d2plane <= r && d1 < plane->getLongueur() && d2 < plane->getLongueur()) {
+        return true;
+    } else {
+        return false;
+    }
+    
+    
+  return false;
 }

@@ -1,1 +1,3 @@
 extlib/
+build/
+*.o

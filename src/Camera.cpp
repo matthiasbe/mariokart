@@ -20,6 +20,12 @@ Camera::~Camera()
 
 void Camera::animate(float time)
 {
+    
+    glm::vec3 velocity = m_kart->getVelocity();
+    glm::vec3 dir = glm::normalize(velocity);
+    glm::vec3 position = m_kart->getPosition() + glm::vec3(0,0,3) - dir*7.0f - velocity*0.1f;
+
+    setViewMatrix(glm::lookAt(position, position +  dir + glm::vec3(0,0,-0.2), glm::vec3(0, 0, 1)));
 }
 
 const glm::mat4& Camera::viewMatrix() const
@@ -62,6 +68,11 @@ void Camera::setPosition( const glm::vec3& pos )
             m_view[3][i] -= m_view[j][i] * pos[j];
         }
     }
+}
+
+void Camera::setKart(ParticleRenderablePtr kart)
+{
+    m_kart = kart->getParticule();
 }
 
 void Camera::setRight( const glm::vec3& right )

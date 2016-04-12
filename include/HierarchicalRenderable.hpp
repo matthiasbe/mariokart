@@ -146,7 +146,6 @@ public :
     std::vector< HierarchicalRenderablePtr > & getChildren();
 
 private:
-
     /**@brief Pointer to the parent renderable.
      *
      * If it has no parent then the pointer value is nullptr.
