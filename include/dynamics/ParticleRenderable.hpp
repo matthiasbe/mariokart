@@ -46,4 +46,5 @@ class ParticleRenderable : public HierarchicalRenderable
 
 typedef std::shared_ptr<ParticleRenderable> ParticleRenderablePtr;
 
+glm::quat RotationBetweenVectors(glm::vec3 start, glm::vec3 dest);
 #endif //PARTICLE_RENDERABLE_HPP

@@ -374,7 +374,8 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
         depart[2*j] = std::make_shared<QuadRenderable>(flatShader, x1, x2, x3, x4, color);
         HierarchicalRenderable::addChild(systemRenderable, depart[2*j]);
     }
-    
+
+
     vector<glm::vec3> pointsInterieurs;
     pointsInterieurs.push_back(glm::vec3(10, 5, 0));
     pointsInterieurs.push_back(glm::vec3(15, 10, 0));
@@ -414,7 +415,7 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
     //Initialize a renderable for the force field applied on the mobile particle.
     //This renderable allows to modify the attribute of the force by key/mouse events
     //Add this renderable to the systemRenderable.
-    ControlledForceFieldRenderablePtr forceRenderable = std::make_shared<ControlledForceFieldRenderable>( flatShader, force );
+    ControlledForceFieldRenderablePtr forceRenderable = std::make_shared<ControlledForceFieldRenderable>( flatShader, force, mobile );
     HierarchicalRenderable::addChild(systemRenderable, forceRenderable);
 
     //Add a damping force field to the mobile.

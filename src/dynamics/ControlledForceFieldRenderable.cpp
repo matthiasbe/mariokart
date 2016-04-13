@@ -4,6 +4,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <GL/glew.h>
+#include <glm/gtx/vector_angle.hpp>
 
 ControlledForceFieldStatus::~ControlledForceFieldStatus(){}
 
@@ -39,12 +40,13 @@ void ControlledForceFieldStatus::clear()
     turning_right =  false;
 }
 
-ControlledForceFieldRenderable::ControlledForceFieldRenderable(ShaderProgramPtr program,ConstantForceFieldPtr forceField )
+ControlledForceFieldRenderable::ControlledForceFieldRenderable(ShaderProgramPtr program,ConstantForceFieldPtr forceField ,ParticlePtr kart)
     : HierarchicalRenderable(program), m_force( forceField ), m_pBuffer(0), m_cBuffer(0), m_nBuffer(0)
 {
     glm::vec3 initial_direction(1,0,0);
     m_status = ControlledForceFieldStatus(initial_direction);
-
+    m_kart = kart;
+    
     //Create geometric data to display an arrow representing the movement of the particle
     const std::vector<ParticlePtr>& particles = m_force->getParticles();
     m_positions.reserve(2.0*particles.size());
@@ -130,22 +132,21 @@ void ControlledForceFieldRenderable::do_animate( float time )
 
         if ( m_status.turning_left && !m_status.turning_right )
         {
-            m_status.angle += dt * m_status.angularSpeed;
-            float cos = std::cos( m_status.angle );
-            float sin = std::sin( m_status.angle );
-            m_status.movement = glm::vec3(cos * m_status.initial.x - sin * m_status.initial.y,
-                                          sin * m_status.initial.x + cos * m_status.initial.y,
-                                          0);
+            m_status.angle = 0.7f + glm::orientedAngle(glm::normalize(m_status.movement),glm::vec3(1,0,0),glm::vec3(0,0,1));
         }
         else if( m_status.turning_right && !m_status.turning_left )
         {
-            m_status.angle -= dt * m_status.angularSpeed;
-            float cos = std::cos( m_status.angle );
-            float sin = std::sin( m_status.angle );
-            m_status.movement = glm::vec3(cos * m_status.initial.x - sin * m_status.initial.y,
-                                          sin * m_status.initial.x + cos * m_status.initial.y,
-                                          0);
+            m_status.angle = -0.7f + glm::orientedAngle(glm::normalize(m_status.movement),glm::vec3(1,0,0),glm::vec3(0,0,1));
         }
+        else{
+           m_status.angle = glm::orientedAngle(glm::normalize(m_status.movement),glm::vec3(1,0,0),glm::vec3(0,0,1));//glm::orientedAngle(glm::normalize(m_status.movement),glm::vec3(1,0,0));
+        }
+        m_status.angle; //+= glm::orientedAngle(glm::normalize(m_kart->getVelocity()),glm::vec3(1,0,0),glm::vec3(0,0,1));
+        float cos = std::cos( m_status.angle );
+        float sin = std::sin( m_status.angle );
+        m_status.movement = glm::vec3(cos * m_status.initial.x - sin * m_status.initial.y,
+                                      sin * m_status.initial.x + cos * m_status.initial.y,
+                                      0);
 
         if( m_status.accelerating )
             m_status.intensity += dt * m_status.acceleration;

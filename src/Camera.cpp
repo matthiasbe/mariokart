@@ -25,7 +25,7 @@ void Camera::animate(float time)
     glm::vec3 dir = glm::normalize(velocity);
     glm::vec3 position = m_kart->getPosition() + glm::vec3(0,0,3) - dir*7.0f - velocity*0.1f;
 
-    setViewMatrix(glm::lookAt(position, position +  dir + glm::vec3(0,0,-0.2), glm::vec3(0, 0, 1)));
+    //setViewMatrix(glm::lookAt(position, position +  dir + glm::vec3(0,0,-0.2), glm::vec3(0, 0, 1)));
 }
 
 const glm::mat4& Camera::viewMatrix() const

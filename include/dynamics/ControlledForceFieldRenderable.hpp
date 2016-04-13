@@ -3,6 +3,7 @@
 
 #include "./../../include/HierarchicalRenderable.hpp"
 #include "./../../include/dynamics/ConstantForceField.hpp"
+#include "./../../include/dynamics/Particle.hpp"
 
 /**@brief Status of a ControlledForceField.
  *
@@ -35,6 +36,7 @@ public:
     bool deaccelerating;
     bool turning_left;
     bool turning_right;
+    ParticlePtr m_kart;
 };
 
 
@@ -58,7 +60,7 @@ public:
    * @param program The shader program used to render the force applied to particles.
    * @param forceField The force field to control with user inputs.
    */
-  ControlledForceFieldRenderable(ShaderProgramPtr program,ConstantForceFieldPtr forceField );
+  ControlledForceFieldRenderable(ShaderProgramPtr program,ConstantForceFieldPtr forceField, ParticlePtr kart);
   ~ControlledForceFieldRenderable();
 
 private:
@@ -78,6 +80,7 @@ private:
   unsigned int m_pBuffer;
   unsigned int m_cBuffer;
   unsigned int m_nBuffer;
+  ParticlePtr m_kart;
 };
 
 typedef std::shared_ptr<ControlledForceFieldRenderable> ControlledForceFieldRenderablePtr;

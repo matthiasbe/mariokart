@@ -161,6 +161,7 @@ private:
    *
    * The mass of this particle.
    */
+  glm::vec3 m_direction;
   float m_mass;
   /**@brief The particle's radius.
    *

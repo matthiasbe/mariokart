@@ -10,7 +10,7 @@
 #include <memory>
 using namespace glm;
 
-quat RotationBetweenVectors(vec3 start, vec3 dest);
+
 
 ParticleRenderable::ParticleRenderable(ShaderProgramPtr shaderProgram, ParticlePtr particle) :
     HierarchicalRenderable(shaderProgram),
@@ -28,171 +28,9 @@ ParticleRenderable::ParticleRenderable(ShaderProgramPtr shaderProgram, ParticleP
     
     glm::vec3 faceNormal(1,0,0);
     
-    /*//Face du haut
-    m_positions.push_back(glm::vec3(0.0, largeur/2.0, 0.0));
-    m_positions.push_back(glm::vec3(longueur, largeur/2.0, 0.0));
-    m_positions.push_back(glm::vec3(0.0, -largeur/2.0, 0.0));
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_positions.push_back(glm::vec3(longueur, largeur/2.0, 0.0));
-    m_positions.push_back(glm::vec3(longueur, -largeur/2.0, 0.0));
-    m_positions.push_back(glm::vec3(0.0, -largeur/2.0, 0.0));
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    
-    //Face du bas
-    m_positions.push_back(glm::vec3(0.0, largeur/2.0, -hauteur));
-    m_positions.push_back(glm::vec3(longueur, largeur/2.0, -hauteur));
-    m_positions.push_back(glm::vec3(0.0, -largeur/2.0, -hauteur));
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_positions.push_back(glm::vec3(longueur, largeur/2.0, -hauteur));
-    m_positions.push_back(glm::vec3(longueur, -largeur/2.0, -hauteur));
-    m_positions.push_back(glm::vec3(0.0, -largeur/2.0, -hauteur));
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    
-    //Face de gauche
-    m_positions.push_back(glm::vec3(0.0, largeur/2.0, hauteur));
-    m_positions.push_back(glm::vec3(longueur, largeur/2.0, -hauteur));
-    m_positions.push_back(glm::vec3(0.0, largeur/2.0, -hauteur));
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_positions.push_back(glm::vec3(longueur, largeur/2.0, -hauteur));
-    m_positions.push_back(glm::vec3(longueur, largeur/2.0, hauteur));
-    m_positions.push_back(glm::vec3(0.0, largeur/2.0, hauteur));
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    
-    
-    //Face de droite
-    m_positions.push_back(glm::vec3(0.0, -largeur/2.0, hauteur));
-    m_positions.push_back(glm::vec3(longueur, -largeur/2.0, -hauteur));
-    m_positions.push_back(glm::vec3(0.0, -largeur/2.0, -hauteur));
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_positions.push_back(glm::vec3(longueur, -largeur/2.0, -hauteur));
-    m_positions.push_back(glm::vec3(longueur, -largeur/2.0, hauteur));
-    m_positions.push_back(glm::vec3(0.0, -largeur/2.0, hauteur));
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    
-    
-    //Face avant
-    m_positions.push_back(glm::vec3(longueur, largeur/2.0, hauteur));
-    m_positions.push_back(glm::vec3(longueur, -largeur/2.0, -hauteur));
-    m_positions.push_back(glm::vec3(longueur, largeur/2.0, -hauteur));
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_positions.push_back(glm::vec3(longueur, -largeur/2.0, -hauteur));
-    m_positions.push_back(glm::vec3(longueur, -largeur/2.0, hauteur));
-    m_positions.push_back(glm::vec3(longueur, largeur/2.0, hauteur));
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    
-    //Face arriere
-    m_positions.push_back(glm::vec3(0.0, largeur/2.0, hauteur));
-    m_positions.push_back(glm::vec3(0.0, -largeur/2.0, -hauteur));
-    m_positions.push_back(glm::vec3(0.0, largeur/2.0, -hauteur));
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_positions.push_back(glm::vec3(0.0, -largeur/2.0, -hauteur));
-    m_positions.push_back(glm::vec3(0.0, -largeur/2.0, hauteur));
-    m_positions.push_back(glm::vec3(0.0, largeur/2.0, hauteur));
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_normals.push_back(faceNormal);
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));
-    m_colors.push_back(glm::vec4(1.0, 0.0, 0.0, 1.0));*/
-    
+
     glm::vec3 center(0.0, 0.0, 0.0);
 
-    /*for (int i = 0; i < thetaStep; ++i) {
-        for (int j = 0; j < phiStep; ++j) {
-            double curr_theta = i*(2.0*M_PI/(double)thetaStep);
-            double curr_phi = j*(M_PI/(double)phiStep);
-
-            double next_theta = (i+1)*(2.0*M_PI/(double)thetaStep);
-            double next_phi = (j+1)*(M_PI/(double)phiStep);
-
-            glm::vec3 faceNormal(1,0,0);
-            std::array<glm::vec3,3> vTriangles;
-            vTriangles[0] = center + glm::vec3(radius*cos(curr_theta)*sin(curr_phi), radius*sin(curr_theta)*sin(curr_phi), radius*cos(curr_phi));
-            vTriangles[1] = center + glm::vec3(radius*cos(next_theta)*sin(curr_phi), radius*sin(next_theta)*sin(curr_phi), radius*cos(curr_phi));
-            vTriangles[2] = center + glm::vec3(radius*cos(next_theta)*sin(next_phi), radius*sin(next_theta)*sin(next_phi), radius*cos(next_phi));
-            faceNormal = -glm::normalize(glm::cross( vTriangles[1]-vTriangles[0], vTriangles[2]-vTriangles[0] ));
-
-            m_positions.push_back( vTriangles[0] );
-            m_positions.push_back( vTriangles[1] );
-            m_positions.push_back( vTriangles[2] );
-            m_normals.push_back( faceNormal );
-            m_normals.push_back( faceNormal );
-            m_normals.push_back( faceNormal );
-            m_colors.push_back( glm::vec4(1.0,1.0,0.0,1.0) );
-            m_colors.push_back( glm::vec4(1.0,0.0,0.0,1.0) );
-            m_colors.push_back( glm::vec4(1.0,0.0,0.0,1.0) );
-
-            vTriangles[0] = center + glm::vec3(radius*cos(curr_theta)*sin(curr_phi), radius*sin(curr_theta)*sin(curr_phi), radius*cos(curr_phi));
-            vTriangles[1] = center + glm::vec3(radius*cos(next_theta)*sin(next_phi), radius*sin(next_theta)*sin(next_phi), radius*cos(next_phi));
-            vTriangles[2] = center + glm::vec3(radius*cos(curr_theta)*sin(next_phi), radius*sin(curr_theta)*sin(next_phi), radius*cos(next_phi));
-            faceNormal = -glm::normalize(glm::cross( vTriangles[1]-vTriangles[0], vTriangles[2]-vTriangles[0] ));
-
-            m_positions.push_back( vTriangles[0] );
-            m_positions.push_back( vTriangles[1] );
-            m_positions.push_back( vTriangles[2] );
-            m_normals.push_back( faceNormal );
-            m_normals.push_back( faceNormal );
-            m_normals.push_back( faceNormal );
-            m_colors.push_back( glm::vec4(0.0,0.0,1.0,1.0) );
-            m_colors.push_back( glm::vec4(0.0,0.0,1.0,1.0) );
-            m_colors.push_back( glm::vec4(0.0,0.0,1.0,1.0) );
-        }
-    }*/
 
     //Create buffers
     glGenBuffers(1, &m_pBuffer); //vertices
@@ -220,7 +58,6 @@ void ParticleRenderable::do_draw()
     glm::vec3 dir = normalize(m_particle->getVelocity());
     //float x = dir;
     vec3 top = vec3(0,1,0);
-    vec3 myQuat = normalize(cross(top,dir));
     setParentTransform(GeometricTransformation(pPosition,RotationBetweenVectors(top,dir),glm::vec3(1.0f)).toMatrix());
 
     //Draw geometric data
