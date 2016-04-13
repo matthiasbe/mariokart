@@ -206,6 +206,8 @@ public:
 
     ShaderProgramPtr getShaderProgram() const;
 
+    void displayTextInViewer(std::string text) const;
+
 private:
     /** @name Private viewer interface.
      * According to guideline #1, we have used the Template method. Now we are

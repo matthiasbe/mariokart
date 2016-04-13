@@ -1,5 +1,6 @@
 #include "./../include/Renderable.hpp"
 #include "./../include/gl_helper.hpp"
+#include "./../include/Viewer.hpp"
 #include <glm/gtc/type_ptr.hpp>
 
 Renderable::~Renderable(){}
@@ -128,4 +129,9 @@ void Renderable::beforeAnimate( float time )
 Viewer* Renderable::getViewer() const
 {
     return m_viewer;
+}
+
+void Renderable::displayTextInViewer(std::string text) const
+{
+    getViewer()->displayText(text);
 }

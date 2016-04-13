@@ -20,8 +20,8 @@ void EulerExplicitSolver::do_solve(const float& dt, std::vector<ParticlePtr>& pa
             //Functions to use:
             //Particle::getPosition(), Particle::getVelocity(), Particle::getMass(), Particle::getForce()
             //Particle::setPosition(), Particle::setVelocity()
-            p.get()->incrVelocity((1/p.get()->getMass())*dt*p.get()->getForce());
-            p.get()->incrPosition(dt*p.get()->getVelocity());
+            p->setVelocity( p->getVelocity() + dt * ( 1.0f/p->getMass() ) * p->getForce() );
+            p->setPosition( p->getPosition() + dt * p->getVelocity() );
         }
     }
 }

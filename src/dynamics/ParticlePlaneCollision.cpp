@@ -41,14 +41,14 @@ void ParticlePlaneCollision::do_solveCollision()
     m_particle->setPosition(particlePosition - (d2plane - r)*normale);
     
     m_particle->setVelocity(particleVelocity - (1.0f + m_restitution)*dot(particleVelocity, normale)*normale);
-    
+
 }
 
 
 
 bool testParticlePlane(const ParticlePtr &particle, const PlanePtr &plane)
 {
-  /* Equation of a plane passing through A and normal to n:
+    /* Equation of a plane passing through A and normal to n:
    * dot( p - A, n ) = dot( p, n ) - dot( A, n ) = 0
    * dot( A, n ) is stored in the "distanceToOrigin" of the plane.
    *
@@ -64,6 +64,7 @@ bool testParticlePlane(const ParticlePtr &particle, const PlanePtr &plane)
    * <=> abs( dot( c, n ) - dot( A, n ) ) - r <= 0
    * <=> abs( dot( c, n ) - dot( A, n ) ) <= r
    */
+
     //TODO: Test collision between particle and plane
     //Functions to use:
     //glm::dot(v1, v2): Return the dot product of two vector.

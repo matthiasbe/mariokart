@@ -49,9 +49,9 @@ ControlledForceFieldRenderable::ControlledForceFieldRenderable(ShaderProgramPtr 
     
     //Create geometric data to display an arrow representing the movement of the particle
     const std::vector<ParticlePtr>& particles = m_force->getParticles();
-    m_positions.reserve(2.0*particles.size());
-    m_colors.reserve(2.0*particles.size());
-    m_normals.reserve(2.0*particles.size());
+    m_positions.clear();
+    m_colors.clear();
+    m_normals.clear();
 
     for(ParticlePtr p : particles)
     {
@@ -165,12 +165,9 @@ void ControlledForceFieldRenderable::do_draw()
 {
     //Update vertices positions from particle's positions
     const std::vector<ParticlePtr>& particles = m_force->getParticles();
-    m_positions.reserve(2.0*particles.size());
-    m_colors.reserve(2.0*particles.size());
-    m_normals.reserve(2.0*particles.size());
-    m_positions.resize(0);
-    m_colors.resize(0);
-    m_normals.resize(0);
+    m_positions.clear();
+    m_colors.clear();
+    m_normals.clear();
 
     //Display an arrow representing the movement of the particle
     for(ParticlePtr p : particles)

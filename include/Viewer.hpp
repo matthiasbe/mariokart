@@ -10,11 +10,13 @@
 
 #include "Renderable.hpp"
 #include "Camera.hpp"
+#include "lighting/Light.hpp"
 #include "TextEngine.hpp"
 #include "FPSCounter.hpp"
 
 #include <unordered_set>
 #include <memory>
+#include <string>
 #include <chrono>
 
 #include <GL/glew.h>
@@ -204,6 +206,14 @@ public:
     void setAnimationLoop(bool animationLoop, float loopDuration=0.0);
     /**@}*/
 
+    void setDirectionalLight(const DirectionalLightPtr& directionalLight);
+
+    void addPointLight(const PointLightPtr& pointLight);
+
+    void addSpotLight(const SpotLightPtr& spotLight);
+
+    void displayText(std::string text, Viewer::Duration duration = std::chrono::seconds(3));
+
 private:
     /**@brief Forbidden default constructor.
      *
@@ -257,6 +267,9 @@ private:
     Camera m_camera; /*!< Camera used to render the scene in the Viewer. */
     sf::RenderWindow m_window; /*!< Pointer to the render window. */
     std::unordered_set< RenderablePtr > m_renderables; /*!< Set of renderables that the viewer displays. */
+    DirectionalLightPtr m_directionalLight; /*!< Pointer to a directional light. */
+    std::vector<PointLightPtr> m_pointLights; /*!< Vector of pointer to the point lights. */
+    std::vector<SpotLightPtr> m_spotLights; /*!< Vector of pointer to the spot lights. */
 
 
     std::unordered_set< ShaderProgramPtr > m_programs;
