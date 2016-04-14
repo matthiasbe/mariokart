@@ -26,6 +26,7 @@ FrameRenderable::FrameRenderable(ShaderProgramPtr shaderProgram)
     glcheck(glGenBuffers(1, &m_cBuffer)); //colors
 
     //Activate buffer and send data to the graphics card
+
     glcheck(glBindBuffer(GL_ARRAY_BUFFER, m_pBuffer));
     glcheck(glBufferData(GL_ARRAY_BUFFER, m_positions.size()*sizeof(glm::vec3), m_positions.data(), GL_STATIC_DRAW));
     glcheck(glBindBuffer(GL_ARRAY_BUFFER, m_cBuffer));

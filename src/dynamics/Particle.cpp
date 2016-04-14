@@ -23,10 +23,13 @@ Particle::Particle(const glm::vec3 &position, const glm::vec3 &velocity, const f
       m_force(glm::vec3(0.0,0.0,0.0)),
       m_mass(mass),
       m_radius(radius), m_isFixed( false )
-{}
+{
+    m_direction = glm::vec3(1,0,0);
+}
 
 Particle::~Particle()
 {}
+
 
 
 const glm::vec3 & Particle::getPosition() const
@@ -72,6 +75,7 @@ void Particle::setForce(const glm::vec3 &force)
 void Particle::incrPosition(const glm::vec3 &pos)
 {
     m_position += pos;
+    m_direction = pos;
 }
 
 void Particle::incrVelocity(const glm::vec3 &vel)
@@ -101,3 +105,4 @@ std::ostream& operator<<(std::ostream& os, const ParticlePtr& p)
 
     return os;
 }
+
