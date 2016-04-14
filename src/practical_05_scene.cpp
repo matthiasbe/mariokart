@@ -326,14 +326,17 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
     viewer.getCamera().setViewMatrix(glm::lookAt(glm::vec3(0, 0, 40), glm::vec3(0, 20, 0), glm::vec3(0, 1, 0)));
 
     //Initialize two particles with position, velocity, mass and radius and add it to the system
-    glm::vec3 px(0.0, 0.0, 0.0),pv(0.0,0.0,0.0);
+    glm::vec3 px(0.0, 0.0, 0.0),pv(0.0000001,0.0,0.0);
     float pm=1.0, pr=1.0;
-    px = glm::vec3(0.0,0.0,1.0);
+    px = glm::vec3(0.0,-2.0,1.0);
     ParticlePtr mobile = std::make_shared<Particle>( px, pv, pm, pr);
     system->addParticle( mobile );
-    /*px = glm::vec3(0.0,5.0,1.0);
+    
+    //Kart de l'IA
+    px = glm::vec3(0.0,2.0,1.0);
+    pv = glm::vec3(0.0000001, 0.0, 0.0);
     ParticlePtr other = std::make_shared<Particle>( px, pv, pm, pr);
-    system->addParticle( other );*/
+    system->addParticle( other );
 
     //Create a particleRenderable for each particle of the system
     //Add them to the system renderable
@@ -341,8 +344,11 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
     HierarchicalRenderable::addChild(systemRenderable, mobileRenderable);
     createKart(mobileRenderable,flatShader,system);
     viewer.getCamera().setKart(mobileRenderable);
-    /*ParticleRenderablePtr otherRenderable = std::make_shared<ParticleRenderable>( flatShader, other );
-    HierarchicalRenderable::addChild(systemRenderable, otherRenderable);*/
+    
+    //Kart de l'IA
+    ParticleRenderablePtr otherRenderable = std::make_shared<ParticleRenderable>( flatShader, other );
+    HierarchicalRenderable::addChild(systemRenderable, otherRenderable);
+    createKart(otherRenderable,flatShader,system);
 
     glm::vec3 x1, x2, x3, x4;
     glm::vec4 color;
@@ -410,16 +416,33 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
     vParticle.push_back(mobile);
     ConstantForceFieldPtr force = std::make_shared<ConstantForceField>(vParticle, nullForce);
     system->addForceField( force );
+    
+    //Initialize a force field that apply only to the other particle
+    glm::vec3 nullForceOther(0.0, 0.0, 0.0);
+    std::vector<ParticlePtr> vParticleOther;
+    vParticleOther.push_back(other);
+    ConstantForceFieldPtr forceOther = std::make_shared<ConstantForceField>(vParticleOther, nullForceOther);
+    system->addForceField( forceOther );
 
     //Initialize a renderable for the force field applied on the mobile particle.
     //This renderable allows to modify the attribute of the force by key/mouse events
     //Add this renderable to the systemRenderable.
     ControlledForceFieldRenderablePtr forceRenderable = std::make_shared<ControlledForceFieldRenderable>( flatShader, force );
     HierarchicalRenderable::addChild(systemRenderable, forceRenderable);
+    
+    /*ConstantForceFieldRenderablePtr constantRenderable = std::make_shared<ConstantForceFieldRenderable>( flatShader, force );
+    HierarchicalRenderable::addChild(systemRenderable, constantRenderable);*/
+    
+    glm::vec3 force2 = glm::vec3 (0.0,0.0,0.0);
+    //ConstantForceField otherForce = new ConstantForceField(*other, force2);
 
     //Add a damping force field to the mobile.
     DampingForceFieldPtr dampingForceField = std::make_shared<DampingForceField>(vParticle, 0.9);
     system->addForceField( dampingForceField );
+    
+    //Add a damping force field to the other
+    DampingForceFieldPtr dampingForceFieldOther = std::make_shared<DampingForceField>(vParticleOther, 0.9);
+    system->addForceField( dampingForceFieldOther );
 
     //Activate collision and set the restitution coefficient to 1.0
     system->setCollisionsDetection(true);

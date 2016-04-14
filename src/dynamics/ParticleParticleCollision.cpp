@@ -51,8 +51,8 @@ void ParticleParticleCollision::do_solveCollision()
     float proj_v = (1.0f+m_restitution)*glm::dot(k, prev_v1-prev_v2)/(1.0 / m_p1->getMass() + 1.0 / m_p2->getMass());
     glm::vec3 new_v1 = prev_v1 - proj_v/m_p1->getMass()*k;
     glm::vec3 new_v2 = prev_v2 + proj_v/m_p2->getMass()*k;
-    m_p1->setVelocity(new_v1);
-    m_p2->setVelocity(new_v2);
+    //m_p1->setVelocity(new_v1);
+    //m_p2->setVelocity(new_v2);
 }
 
 
