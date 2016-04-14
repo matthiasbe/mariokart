@@ -1,4 +1,4 @@
-#include "./../../include/dynamics/ControlledForceFieldRenderable.hpp"
+#include "./../../include/dynamics/KartForceFieldRenderable.hpp"
 #include "./../../include/gl_helper.hpp"
 #include "./../../include/log.hpp"
 #include <glm/gtc/type_ptr.hpp>
@@ -6,24 +6,24 @@
 #include <GL/glew.h>
 #include <glm/gtx/vector_angle.hpp>
 
-ControlledForceFieldStatus::~ControlledForceFieldStatus(){}
+KartForceStatus::~KartForceStatus(){}
 
-ControlledForceFieldStatus::ControlledForceFieldStatus()
+KartForceStatus::KartForceStatus()
 {
     clear();
 }
 
-ControlledForceFieldStatus::ControlledForceFieldStatus(const glm::vec3& initial_direction)
+KartForceStatus::KartForceStatus(const glm::vec3& initial_direction)
 {
     clear();
     initial =  initial_direction;
     movement = initial_direction;
 };
 
-void ControlledForceFieldStatus::clear()
+void KartForceStatus::clear()
 {
-    initial = glm::vec3(1,0,0);
-    movement = glm::vec3(1,0,0);
+    initial = glm::vec3(0,0,0);
+    movement = glm::vec3(0,0,0);
     angle =  0;
     last_time =  0;
     intensity = 0;
@@ -40,11 +40,11 @@ void ControlledForceFieldStatus::clear()
     turning_right =  false;
 }
 
-ControlledForceFieldRenderable::ControlledForceFieldRenderable(ShaderProgramPtr program,ConstantForceFieldPtr forceField ,ParticleRenderablePtr kart)
+KartForceFieldRenderable::KartForceFieldRenderable(ShaderProgramPtr program,ConstantForceFieldPtr forceField ,ParticlePtr kart)
     : HierarchicalRenderable(program), m_force( forceField ), m_pBuffer(0), m_cBuffer(0), m_nBuffer(0)
 {
     glm::vec3 initial_direction(1,0,0);
-    m_status = ControlledForceFieldStatus(initial_direction);
+    m_status = KartForceStatus(initial_direction);
     m_kart = kart;
     
     //Create geometric data to display an arrow representing the movement of the particle
@@ -77,14 +77,14 @@ ControlledForceFieldRenderable::ControlledForceFieldRenderable(ShaderProgramPtr 
     glcheck(glBufferData(GL_ARRAY_BUFFER, m_normals.size()*sizeof(glm::vec3), m_normals.data(), GL_STATIC_DRAW));
 }
 
-ControlledForceFieldRenderable::~ControlledForceFieldRenderable()
+KartForceFieldRenderable::~KartForceFieldRenderable()
 {
     glcheck(glDeleteBuffers(1, &m_pBuffer));
     glcheck(glDeleteBuffers(1, &m_cBuffer));
     glcheck(glDeleteBuffers(1, &m_nBuffer));
 }
 
-void ControlledForceFieldRenderable::do_keyPressedEvent( sf::Event& e )
+void KartForceFieldRenderable::do_keyPressedEvent( sf::Event& e )
 {
     if( e.key.code == sf::Keyboard::Left )
     {
@@ -104,7 +104,7 @@ void ControlledForceFieldRenderable::do_keyPressedEvent( sf::Event& e )
     }
 }
 
-void ControlledForceFieldRenderable::do_keyReleasedEvent( sf::Event& e )
+void KartForceFieldRenderable::do_keyReleasedEvent( sf::Event& e )
 {
     if( e.key.code == sf::Keyboard::Left )
     {
@@ -124,28 +124,30 @@ void ControlledForceFieldRenderable::do_keyReleasedEvent( sf::Event& e )
     }
 }
 
-void ControlledForceFieldRenderable::do_animate( float time )
+void KartForceFieldRenderable::do_animate( float time )
 {
     if( time > m_status.last_time )
     {
         float dt = time - m_status.last_time;
 
-        if ( m_status.turning_left && !m_status.turning_right ) {
-            m_status.angle = 1.0f;
+        if ( m_status.turning_left && !m_status.turning_right )
+        {
+            m_status.angle = 0.7f + glm::orientedAngle(glm::normalize(m_status.movement),glm::vec3(1,0,0),glm::vec3(0,0,1));
         }
         else if( m_status.turning_right && !m_status.turning_left )
         {
-            m_status.angle = -1.0f ;
+            m_status.angle = -0.7f + glm::orientedAngle(glm::normalize(m_status.movement),glm::vec3(1,0,0),glm::vec3(0,0,1));
         }
         else{
-            m_status.angle = 0.0f;
+           m_status.angle = glm::orientedAngle(glm::normalize(m_status.movement),glm::vec3(1,0,0),glm::vec3(0,0,1));//glm::orientedAngle(glm::normalize(m_status.movement),glm::vec3(1,0,0));
         }
-        m_status.angle += glm::orientedAngle(glm::vec3(1,0,0),glm::normalize(m_kart->getMovement()),glm::vec3(0,0,1));
+        m_status.angle; //+= glm::orientedAngle(glm::normalize(m_kart->getVelocity()),glm::vec3(1,0,0),glm::vec3(0,0,1));
         float cos = std::cos( m_status.angle );
         float sin = std::sin( m_status.angle );
         m_status.movement = glm::vec3(cos * m_status.initial.x - sin * m_status.initial.y,
                                       sin * m_status.initial.x + cos * m_status.initial.y,
                                       0);
+
         if( m_status.accelerating )
             m_status.intensity += dt * m_status.acceleration;
         else if( m_status.deaccelerating )
@@ -159,16 +161,13 @@ void ControlledForceFieldRenderable::do_animate( float time )
     m_status.last_time = time;
 }
 
-void ControlledForceFieldRenderable::do_draw()
+void KartForceFieldRenderable::do_draw()
 {
     //Update vertices positions from particle's positions
     const std::vector<ParticlePtr>& particles = m_force->getParticles();
-    m_positions.reserve(2.0*particles.size());
-    m_colors.reserve(2.0*particles.size());
-    m_normals.reserve(2.0*particles.size());
-    m_positions.resize(0);
-    m_colors.resize(0);
-    m_normals.resize(0);
+    m_positions.clear();
+    m_colors.clear();
+    m_normals.clear();
 
     //Display an arrow representing the movement of the particle
     for(ParticlePtr p : particles)

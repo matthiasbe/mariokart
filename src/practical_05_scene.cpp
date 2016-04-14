@@ -415,7 +415,7 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
     //Initialize a renderable for the force field applied on the mobile particle.
     //This renderable allows to modify the attribute of the force by key/mouse events
     //Add this renderable to the systemRenderable.
-    ControlledForceFieldRenderablePtr forceRenderable = std::make_shared<ControlledForceFieldRenderable>( flatShader, force, mobile );
+    ControlledForceFieldRenderablePtr forceRenderable = std::make_shared<ControlledForceFieldRenderable>( flatShader, force, mobileRenderable );
     HierarchicalRenderable::addChild(systemRenderable, forceRenderable);
 
     //Add a damping force field to the mobile.
@@ -429,7 +429,7 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
 
 void createKart(ParticleRenderablePtr root,ShaderProgramPtr program, DynamicSystemPtr& system){
     MeshRenderablePtr kart = std::make_shared<MeshRenderable>(program,"../meshes/kart.obj");
-    kart->setParentTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat(glm::vec3(1.57f,0,0)),glm::vec3{1, 1, 1}).toMatrix());
+    kart->setParentTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat(glm::vec3(1.57f,0,0)),glm::vec3{0.3, 0.3, 0.3}).toMatrix());
     kart->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat{1, 0, 0, 0},glm::vec3{1, 1, 1}).toMatrix());
     HierarchicalRenderable::addChild(root,kart);
 

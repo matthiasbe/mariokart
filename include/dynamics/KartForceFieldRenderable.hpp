@@ -1,9 +1,9 @@
-#ifndef CONTROLLED_FORCE_FIELD_RENDERABLE_HPP
-#define CONTROLLED_FORCE_FIELD_RENDERABLE_HPP
+#ifndef KART_FORCE_HPP
+#define KART_FORCE_HPP
 
 #include "./../../include/HierarchicalRenderable.hpp"
 #include "./../../include/dynamics/ConstantForceField.hpp"
-#include "./../../include/dynamics/ParticleRenderable.hpp"
+#include "./../../include/dynamics/Particle.hpp"
 
 /**@brief Status of a ControlledForceField.
  *
@@ -11,12 +11,12 @@
  * field thanks to user inputs. You can (and should) adapt this class
  * and its default value to the kind of behavior you want in your project.
  */
-class ControlledForceFieldStatus
+class KartForceStatus
 {
 public:
-    ControlledForceFieldStatus();
-    ControlledForceFieldStatus(const glm::vec3& initial_direction);
-    ~ControlledForceFieldStatus();
+    KartForceStatus();
+    KartForceStatus(const glm::vec3& initial_direction);
+    ~KartForceStatus();
     void clear();
 
 public:
@@ -51,7 +51,7 @@ public:
  * this is the easiest way to do so. We derive from a hierarchical renderable to be able
  * to use the same local frame as the dynamic system using the force field (see DynamicSystemRenderable).
  */
-class ControlledForceFieldRenderable : public HierarchicalRenderable
+class KartForceFieldRenderable : public HierarchicalRenderable
 {
 public:
   /**@brief Build a new controlled force field renderable.
@@ -60,8 +60,8 @@ public:
    * @param program The shader program used to render the force applied to particles.
    * @param forceField The force field to control with user inputs.
    */
-  ControlledForceFieldRenderable(ShaderProgramPtr program,ConstantForceFieldPtr forceField, ParticleRenderablePtr kart);
-  ~ControlledForceFieldRenderable();
+  KartForceFieldRenderable(ShaderProgramPtr program,ConstantForceFieldPtr forceField, ParticlePtr kart);
+  ~KartForceFieldRenderable();
 
 private:
 
@@ -70,7 +70,7 @@ private:
   virtual void do_animate( float time );
   virtual void do_draw();
 
-  ControlledForceFieldStatus m_status;
+  KartForceStatus m_status;
   ConstantForceFieldPtr m_force;
 
   std::vector< glm::vec3 > m_positions;
@@ -80,9 +80,9 @@ private:
   unsigned int m_pBuffer;
   unsigned int m_cBuffer;
   unsigned int m_nBuffer;
-  ParticleRenderablePtr m_kart;
+  ParticlePtr m_kart;
 };
 
-typedef std::shared_ptr<ControlledForceFieldRenderable> ControlledForceFieldRenderablePtr;
+typedef std::shared_ptr<KartForceFieldRenderable> KartForceFieldRenderablePtr;
 
 #endif //CONTROLLED_FORCE_FIELD_RENDERABLE_HPP
