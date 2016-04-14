@@ -40,8 +40,15 @@ void ParticlePlaneCollision::do_solveCollision()
     
     m_particle->setPosition(particlePosition - (d2plane - r)*normale);
     
-    m_particle->setVelocity(particleVelocity - (1.0f + m_restitution)*dot(particleVelocity, normale)*normale);
-
+    //m_particle->setVelocity(particleVelocity - (1.0f + m_restitution)*dot(particleVelocity, normale)*normale);
+    /*glm::vec3 v = glm::normalize(particleVelocity);
+    
+    //Cas angle d'attaque > 45°
+    if (dot(v, normale) > 0.70710678118) {
+        m_particle->setVelocity(particleVelocity - (1.0f + m_restitution)*dot(particleVelocity, normale)*normale);
+        m_particle->setPosition(glm::vec3(0,0,0));
+    }*/
+        
 }
 
 
