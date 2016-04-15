@@ -50,6 +50,7 @@ private:
 
     void do_keyPressedEvent(sf::Event& e);
     void do_keyReleasedEvent(sf::Event& e);
+    void do_iaEvent();
     void do_draw();
     void do_animate( float time );
 

@@ -228,6 +228,7 @@ private:
      * \param e a SFML event.
      */
     void keyPressedEvent(sf::Event& e);
+    void iaEvent();
 
     /**\brief keyReleasedEvent
      * Manage key releasing events.

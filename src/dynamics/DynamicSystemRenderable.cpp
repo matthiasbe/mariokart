@@ -32,18 +32,21 @@ void DynamicSystemRenderable::do_animate(float time )
 
 }
 
-void DynamicSystemRenderable::setDynamicSystem(const DynamicSystemPtr &system)
-{
+void DynamicSystemRenderable::setDynamicSystem(const DynamicSystemPtr &system) {
     m_system = system;
 }
 
-void DynamicSystemRenderable::do_keyPressedEvent(sf::Event &e)
-{
-    if(e.key.code == sf::Keyboard::A ) //Toggle collision detection
-    {
-        m_system->setCollisionsDetection( !m_system->getCollisionDetection() );
+void DynamicSystemRenderable::do_iaEvent() {
+    for (HierarchicalRenderablePtr c : getChildren()) {
+        c->iaEvent();
     }
-    else if(e.key.code == sf::Keyboard::T ) //Tilt particles
+}
+
+void DynamicSystemRenderable::do_keyPressedEvent(sf::Event &e) {
+    if (e.key.code == sf::Keyboard::A) //Toggle collision detection
+    {
+        m_system->setCollisionsDetection(!m_system->getCollisionDetection());
+    } else if (e.key.code == sf::Keyboard::T) //Tilt particles
     {
         srand(time(0));
         // "tilt" all particles randomly around their position
