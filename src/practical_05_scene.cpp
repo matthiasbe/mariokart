@@ -113,14 +113,14 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
     viewer.getCamera().setViewMatrix(glm::lookAt(glm::vec3(0, 0, 40), glm::vec3(0, 20, 0), glm::vec3(0, 1, 0)));
 
     //Initialize two particles with position, velocity, mass and radius and add it to the system
-    glm::vec3 px(0.0, 0.0, 0.0),pv(0.0000001,0.0,0.0);
+    glm::vec3 px(0.0, -1.0, 0.0),pv(0.0000001,0.0,0.0);
     float pm=1.0, pr=1.0;
-    px = glm::vec3(0.0,-2.0,1.0);
+    px = glm::vec3(0.0,-2.0,0.2);
     ParticlePtr mobile = std::make_shared<Particle>( px, pv, pm, pr,true);
     system->addParticle( mobile );
     
     //Kart de l'IA
-    px = glm::vec3(0.0,2.0,1.0);
+    px = glm::vec3(0.0,2.0,0.2);
     pv = glm::vec3(0.0000001, 0.0, 0.0);
     ParticlePtr other = std::make_shared<Particle>( px, pv, pm, pr,false);
     system->addParticle( other );
@@ -197,7 +197,7 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
     pointsExterieurs.push_back(glm::vec3(-15, -5, 0));
     
     float h = 1.0;
-    color = glm::vec4(1, 0, 0, 1.0);
+    color = glm::vec4(1, 1, 1, 1.0);
     dessiner_circuit(pointsInterieurs, h, color, flatShader, systemRenderable, system, false);
     dessiner_circuit(pointsExterieurs, h, color, flatShader, systemRenderable, system, true);
     

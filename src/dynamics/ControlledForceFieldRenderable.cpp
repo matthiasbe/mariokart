@@ -180,8 +180,8 @@ void ControlledForceFieldRenderable::do_draw()
         m_colors.push_back(glm::vec4(1.0,0.0,0.0,1.0));
         m_normals.push_back(glm::vec3(1.0,0.0,0.0));
         m_normals.push_back(glm::vec3(1.0,0.0,0.0));
-    }
-    */
+    }*/
+
     //Update data on the GPU
     glcheck(glBindBuffer(GL_ARRAY_BUFFER, m_pBuffer));
     glcheck(glBufferData(GL_ARRAY_BUFFER, m_positions.size()*sizeof(glm::vec3), m_positions.data(), GL_STATIC_DRAW));
