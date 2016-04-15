@@ -131,15 +131,16 @@ void ControlledForceFieldRenderable::do_animate( float time )
         float dt = time - m_status.last_time;
 
         if ( m_status.turning_left && !m_status.turning_right ) {
-            m_status.angle = 1.0f;
+            m_status.angle = 1.3f;
         }
         else if( m_status.turning_right && !m_status.turning_left )
         {
-            m_status.angle = -1.0f ;
+            m_status.angle = -1.3f ;
         }
         else{
             m_status.angle = 0.0f;
         }
+        m_status.angle *= glm::dot(m_kart->getVelocity(),m_kart->getVelocity())/300.0f;
         m_status.angle += glm::orientedAngle(glm::vec3(1,0,0),glm::normalize(m_kart->getMovement()),glm::vec3(0,0,1));
         float cos = std::cos( m_status.angle );
         float sin = std::sin( m_status.angle );

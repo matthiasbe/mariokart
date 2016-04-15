@@ -19,7 +19,7 @@ TexturedPlaneRenderable::~TexturedPlaneRenderable()
 
 TexturedPlaneRenderable::TexturedPlaneRenderable(ShaderProgramPtr shaderProgram, const std::string& filename)
     : HierarchicalRenderable(shaderProgram),
-      m_pBuffer(0), m_cBuffer(0), m_nBuffer(0), m_tBuffer(0), m_wrapOption(0), m_filterOption(0)
+      m_pBuffer(0), m_cBuffer(0), m_nBuffer(0), m_tBuffer(0), m_wrapOption(2), m_filterOption(0)
 {
     //Initialize geometry
     getUnitPlane(m_positions, m_normals, m_origTexCoords);
@@ -146,6 +146,7 @@ void TexturedPlaneRenderable::do_draw()
     {
         glcheck(glDisableVertexAttribArray(textureLocation));
     }
+    updateTextureOption();
 }
 
 void TexturedPlaneRenderable::do_animate(float time)
@@ -193,7 +194,7 @@ void TexturedPlaneRenderable::updateTextureOption()
         }
         glcheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT));
         glcheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT));
-        text.append("Wrapping: MIRRORED_REPEAT");
+//        text.append("Wrapping: MIRRORED_REPEAT");
         break;
 
     case 3:
@@ -225,7 +226,7 @@ void TexturedPlaneRenderable::updateTextureOption()
     case 0:
         glcheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
         glcheck(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
-        text.append(", Filtering: NEAREST");
+//        text.append(", Filtering: NEAREST");
         break;
 
     case 1:

@@ -3,7 +3,6 @@
 
 #include "./../HierarchicalRenderable.hpp"
 #include "./../lighting/Material.hpp"
-#include <vector>
 #include <glm/glm.hpp>
 
 class TexturedPlaneRenderable : public HierarchicalRenderable

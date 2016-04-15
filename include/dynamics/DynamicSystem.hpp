@@ -8,6 +8,7 @@
 #include "Particle.hpp"
 #include "Solver.hpp"
 #include "../Plane.hpp"
+#include "../BottleRenderable.hpp"
 
 /**@brief A dynamic system.
  *
@@ -78,6 +79,8 @@ private:
     float m_restitution;
 
 public:
+    BottleRenderablePtr m_bottle;
+
     ~DynamicSystem();
     DynamicSystem();
 
@@ -193,6 +196,7 @@ public:
      * Clear the system, i.e. empty the particles, force fields and plane obstacles.
      */
     void clear();
+
 
 private:
     void detectCollisions();

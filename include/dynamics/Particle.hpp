@@ -31,7 +31,7 @@ public:
       const glm::vec3& position,
       const glm::vec3& velocity,
       const float& mass,
-      const float& radius);
+      const float& radius, bool isKart);
   ~Particle();
 
   /**@brief Access to this particle's position.
@@ -129,7 +129,7 @@ public:
    * Set the particle's position and velocity to their initial values.
    */
   void restart();
-
+    bool m_isKart;
 private:
   /**@brief The initial particle's position.
    *

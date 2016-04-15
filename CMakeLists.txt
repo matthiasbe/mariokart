@@ -108,7 +108,7 @@ set(EXECUTABLE_NAME main)
 #==============================================
 #Project executable definition
 #==============================================
-add_executable(${EXECUTABLE_NAME} ${HEADER_FILES} ${SOURCE_FILES} ${SHADER_FILES})
+add_executable(${EXECUTABLE_NAME} ${HEADER_FILES} ${SOURCE_FILES} ${SHADER_FILES} src/MapTextures.cpp include/MapTextures.hpp)
 
 #==============================================
 #Linking with libraries
