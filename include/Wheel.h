@@ -8,13 +8,14 @@
 #ifndef WHEEL_H
 #define	WHEEL_H
 
-#include "MeshRenderable.hpp"
+#include "texturing/TexturedLightedMeshRenderable.hpp"
 #include "dynamics/Particle.hpp"
 
 
-class Wheel : public MeshRenderable{
+class Wheel : public TexturedLightedMeshRenderable{
 public:
-    Wheel(ShaderProgramPtr program, const std::string& filename, bool rotation,ParticlePtr kart);
+    Wheel(ShaderProgramPtr program, const std::string& filename,
+          const std::string& texture_filename , bool rotation,ParticlePtr kart);
     virtual ~Wheel();
 private:
     void animate(float time);

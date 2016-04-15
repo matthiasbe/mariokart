@@ -101,7 +101,7 @@ void BottleRenderable::do_animate(float time) {
         }
         if(time - lastCollision < 2.0f){
             //glm::vec3 rotation = glm::orientedAngle(glm::vec3(1,0,0),glm::vec3(0,1,0),glm::vec3(0,0,1));
-            setLocalTransform(GeometricTransformation(glm::vec3{-1, 0, 0},glm::quat(glm::vec3(0.4f,1.57f,0)),glm::vec3{1, 1, 1}).toMatrix());
+            setLocalTransform(GeometricTransformation(glm::vec3{-1.5, 0.5, -0.3},glm::quat(glm::vec3(0.4f,1.57f,0)),glm::vec3{1, 1, 1}).toMatrix());
         }else{
             setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat{1,0,0,0},glm::vec3{1, 1, 1}).toMatrix());
         }
