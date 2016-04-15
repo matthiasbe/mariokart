@@ -16,7 +16,7 @@ void Particle::setFixed(bool isFixed)
     m_isFixed = isFixed;
 }
 
-Particle::Particle(const glm::vec3 &position, const glm::vec3 &velocity, const float &mass, const float &radius)
+Particle::Particle(const glm::vec3 &position, const glm::vec3 &velocity, const float &mass, const float &radius, bool isKart)
     : m_initialPosition( position ), m_initialVelocity( velocity ),
         m_position(position),
       m_velocity(velocity),
@@ -24,6 +24,7 @@ Particle::Particle(const glm::vec3 &position, const glm::vec3 &velocity, const f
       m_mass(mass),
       m_radius(radius), m_isFixed( false )
 {
+    m_isKart = isKart;
     m_direction = glm::vec3(1,0,0);
 }
 

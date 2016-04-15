@@ -34,7 +34,6 @@ public:
      * @param system The new dynamic system managed by this.
      */
     void setDynamicSystem(const DynamicSystemPtr &system);
-
 private:
     void do_draw();
     /**@brief Update the dynamic system.

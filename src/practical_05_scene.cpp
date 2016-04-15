@@ -17,6 +17,7 @@
 #include "../include/dynamics/SpringListRenderable.hpp"
 #include "../include/dynamics/ControlledForceFieldRenderable.hpp"
 #include "../include/MeshRenderable.hpp"
+#include "../include/BottleRenderable.hpp"
 #include "../include/SteeringWheel.h"
 #include "../include/Wheel.h"
 #include "../include/movingWheel.h"
@@ -25,7 +26,7 @@ using namespace std;
 #include <iostream>
 
 
-void createKart(ParticleRenderablePtr root,ShaderProgramPtr program, DynamicSystemPtr& system);
+void createKart(ParticleRenderablePtr root,ShaderProgramPtr program, DynamicSystemPtr& system, bool isHuman);
 
 void initialize_practical_05_scene( Viewer& viewer )
 {
@@ -329,26 +330,26 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
     glm::vec3 px(0.0, 0.0, 0.0),pv(0.0000001,0.0,0.0);
     float pm=1.0, pr=1.0;
     px = glm::vec3(0.0,-2.0,1.0);
-    ParticlePtr mobile = std::make_shared<Particle>( px, pv, pm, pr);
+    ParticlePtr mobile = std::make_shared<Particle>( px, pv, pm, pr,true);
     system->addParticle( mobile );
     
     //Kart de l'IA
     px = glm::vec3(0.0,2.0,1.0);
     pv = glm::vec3(0.0000001, 0.0, 0.0);
-    ParticlePtr other = std::make_shared<Particle>( px, pv, pm, pr);
+    ParticlePtr other = std::make_shared<Particle>( px, pv, pm, pr,false);
     system->addParticle( other );
 
     //Create a particleRenderable for each particle of the system
     //Add them to the system renderable
     ParticleRenderablePtr mobileRenderable = std::make_shared<ParticleRenderable>( flatShader, mobile );
     HierarchicalRenderable::addChild(systemRenderable, mobileRenderable);
-    createKart(mobileRenderable,flatShader,system);
+    createKart(mobileRenderable,flatShader,system,true);
     viewer.getCamera().setKart(mobileRenderable);
     
     //Kart de l'IA
     ParticleRenderablePtr otherRenderable = std::make_shared<ParticleRenderable>( flatShader, other );
     HierarchicalRenderable::addChild(systemRenderable, otherRenderable);
-    createKart(otherRenderable,flatShader,system);
+    createKart(otherRenderable,flatShader,system,false);
 
     glm::vec3 x1, x2, x3, x4;
     glm::vec4 color;
@@ -450,7 +451,7 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
     system->setRestitution(1.0f);
 }
 
-void createKart(ParticleRenderablePtr root,ShaderProgramPtr program, DynamicSystemPtr& system){
+void createKart(ParticleRenderablePtr root,ShaderProgramPtr program, DynamicSystemPtr& system,bool isHuman){
     MeshRenderablePtr kart = std::make_shared<MeshRenderable>(program,"../meshes/kart.obj");
     kart->setParentTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat(glm::vec3(1.57f,0,0)),glm::vec3{0.3, 0.3, 0.3}).toMatrix());
     kart->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat{1, 0, 0, 0},glm::vec3{1, 1, 1}).toMatrix());
@@ -470,14 +471,54 @@ void createKart(ParticleRenderablePtr root,ShaderProgramPtr program, DynamicSyst
     wheel->setParentTransform(GeometricTransformation(glm::vec3{-1.3, -0.2, 1.2},glm::quat(glm::vec3(0,0,0)),glm::vec3{0.3, 0.3, 0.3}).toMatrix());
     wheel->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat(1,0,0,0),glm::vec3{1, 1, 1}).toMatrix());
     HierarchicalRenderable::addChild(kart,wheel);
-    
-    MovingWheelPtr wheel2 = std::make_shared<MovingWheel>(program,"../meshes/wheel.obj",true,root->getParticule());
-    wheel2->setParentTransform(GeometricTransformation(glm::vec3{1.3, -0.2, -1.2},glm::quat(glm::vec3(0,3.14f,0)),glm::vec3{0.3, 0.3, 0.3}).toMatrix());
-    wheel2->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat(1,0,0,0),glm::vec3{1, 1, 1}).toMatrix());
-    HierarchicalRenderable::addChild(kart,wheel2);
-    
-    wheel2 = std::make_shared<MovingWheel>(program,"../meshes/wheel.obj",false,root->getParticule());
-    wheel2->setParentTransform(GeometricTransformation(glm::vec3{-1.3, -0.2, -1.2},glm::quat(glm::vec3(0,0,0)),glm::vec3{0.3, 0.3, 0.3}).toMatrix());
-    wheel2->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat(1,0,0,0),glm::vec3{1, 1, 1}).toMatrix());
-    HierarchicalRenderable::addChild(kart,wheel2);
+    if(isHuman) {
+        MovingWheelPtr wheel2 = std::make_shared<MovingWheel>(program, "../meshes/wheel.obj", true,
+                                                              root->getParticule());
+        wheel2->setParentTransform(
+                GeometricTransformation(glm::vec3{1.3, -0.2, -1.2}, glm::quat(glm::vec3(0, 3.14f, 0)),
+                                        glm::vec3{0.3, 0.3, 0.3}).toMatrix());
+        wheel2->setLocalTransform(
+                GeometricTransformation(glm::vec3{0, 0, 0}, glm::quat(1, 0, 0, 0), glm::vec3{1, 1, 1}).toMatrix());
+        HierarchicalRenderable::addChild(kart, wheel2);
+
+        wheel2 = std::make_shared<MovingWheel>(program, "../meshes/wheel.obj", false, root->getParticule());
+        wheel2->setParentTransform(GeometricTransformation(glm::vec3{-1.3, -0.2, -1.2}, glm::quat(glm::vec3(0, 0, 0)),
+                                                           glm::vec3{0.3, 0.3, 0.3}).toMatrix());
+        wheel2->setLocalTransform(
+                GeometricTransformation(glm::vec3{0, 0, 0}, glm::quat(1, 0, 0, 0), glm::vec3{1, 1, 1}).toMatrix());
+        HierarchicalRenderable::addChild(kart, wheel2);
+    }else{
+        WheelPtr wheel2 = std::make_shared<Wheel>(program, "../meshes/wheel.obj", true,
+                                                              root->getParticule());
+        wheel2->setParentTransform(
+                GeometricTransformation(glm::vec3{1.3, -0.2, -1.2}, glm::quat(glm::vec3(0, 3.14f, 0)),
+                                        glm::vec3{0.3, 0.3, 0.3}).toMatrix());
+        wheel2->setLocalTransform(
+                GeometricTransformation(glm::vec3{0, 0, 0}, glm::quat(1, 0, 0, 0), glm::vec3{1, 1, 1}).toMatrix());
+        HierarchicalRenderable::addChild(kart, wheel2);
+
+        wheel2 = std::make_shared<Wheel>(program, "../meshes/wheel.obj", false, root->getParticule());
+        wheel2->setParentTransform(GeometricTransformation(glm::vec3{-1.3, -0.2, -1.2}, glm::quat(glm::vec3(0, 0, 0)),
+                                                           glm::vec3{0.3, 0.3, 0.3}).toMatrix());
+        wheel2->setLocalTransform(
+                GeometricTransformation(glm::vec3{0, 0, 0}, glm::quat(1, 0, 0, 0), glm::vec3{1, 1, 1}).toMatrix());
+        HierarchicalRenderable::addChild(kart, wheel2);
+    }
+    MeshRenderablePtr mario = std::make_shared<MeshRenderable>(program,"../meshes/mario.obj");
+    mario->setParentTransform(GeometricTransformation(glm::vec3{0,0, 0.7},glm::quat(glm::vec3(0,0,0)),glm::vec3{0.5, 0.5, 0.5}).toMatrix());
+    mario->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat{1, 0, 0, 0},glm::vec3{1, 1, 1}).toMatrix());
+    HierarchicalRenderable::addChild(kart,mario);
+
+    if(isHuman){
+        BottleRenderablePtr hand = std::make_shared<BottleRenderable>(program,"../meshes/hand.obj");
+        hand->setParentTransform(GeometricTransformation(glm::vec3{0,0, 0},glm::quat(glm::vec3(0,0,0)),glm::vec3{1, 1, 1}).toMatrix());
+        hand->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat{1, 0, 0, 0},glm::vec3{1, 1, 1}).toMatrix());
+        HierarchicalRenderable::addChild(mario,hand);
+        system->m_bottle = hand;
+    }else{
+        MeshRenderablePtr hand = std::make_shared<MeshRenderable>(program,"../meshes/hand.obj");
+        hand->setParentTransform(GeometricTransformation(glm::vec3{0,0, 0},glm::quat(glm::vec3(0,0,0)),glm::vec3{1, 1, 1}).toMatrix());
+        hand->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat{1, 0, 0, 0},glm::vec3{1, 1, 1}).toMatrix());
+        HierarchicalRenderable::addChild(mario,hand);
+    }
 }

@@ -23,9 +23,10 @@ public:
      * @param program The shader program used to render the particle.
      * @param particle The particle to render.
      */
-    ParticleRenderable( ShaderProgramPtr program, ParticlePtr particle );
+    ParticleRenderable( ShaderProgramPtr program, ParticlePtr particle);
     ParticlePtr getParticule();
     glm::vec3 getMovement();
+    glm::vec3 getVelocity();
 
 private:
     glm::vec3 initial;
@@ -39,6 +40,7 @@ private:
     float deacceleration;
     float angularSpeed;
     float dampingFactor;
+
 
     bool accelerating;
     bool deaccelerating;

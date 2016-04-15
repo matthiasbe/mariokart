@@ -117,6 +117,9 @@ void DynamicSystem::detectCollisions()
             ParticlePtr p2 = m_particles[j];
             if(testParticleParticle(p1,p2))
             {
+                if(p1->m_isKart || p2->m_isKart){
+                    m_bottle->drink = true;
+                }
                 ParticleParticleCollisionPtr c = std::make_shared<ParticleParticleCollision>(p1,p2,m_restitution);
                 m_collisions.push_back(c);
             }

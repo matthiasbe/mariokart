@@ -21,7 +21,6 @@ ParticleRenderable::ParticleRenderable(ShaderProgramPtr shaderProgram, ParticleP
     m_pBuffer(0),
     m_cBuffer(0),
     m_nBuffer(0) {
-
     initial = glm::vec3(1,0,0);
     movement = glm::vec3(1,0,0);
     angle =  0;
@@ -156,6 +155,10 @@ glm::quat RotationBetweenVectors(glm::vec3 start, glm::vec3 dest){
 	);
 
 }
+glm::vec3 ParticleRenderable::getVelocity(){
+    return m_particle->getVelocity();
+}
+
 void ParticleRenderable::do_keyPressedEvent(sf::Event& e){
     for(size_t i=0; i<getChildren().size(); ++i)
         getChildren()[i]->keyPressedEvent(e);
