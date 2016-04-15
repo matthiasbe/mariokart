@@ -32,7 +32,7 @@ using namespace std;
 #include <X11/X.h>
 
 
-void createKart(ParticleRenderablePtr root,ShaderProgramPtr program, DynamicSystemPtr& system, bool isHuman);
+void createKart(ShaderProgramPtr textPrgm, ParticleRenderablePtr root,ShaderProgramPtr program, DynamicSystemPtr& system, bool isHuman);
 void createKart(ParticleRenderablePtr root,ShaderProgramPtr program, DynamicSystemPtr& system);
 void lights(Viewer& viewer);
 
@@ -132,13 +132,13 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
     ShaderProgramPtr texShader = std::make_shared<ShaderProgram>("../shaders/textureVertex.glsl","../shaders/textureFragment.glsl");
 
     //METTRE TEXSHADER??
-    createKart(mobileRenderable,flatShader,system,true);
+    createKart(texShader, mobileRenderable,flatShader,system,true);
     viewer.getCamera().setKart(mobileRenderable);
     
     //Kart de l'IA
     ParticleRenderablePtr otherRenderable = std::make_shared<ParticleRenderable>( flatShader, other );
     HierarchicalRenderable::addChild(systemRenderable, otherRenderable);
-    createKart(otherRenderable,flatShader,system,false);
+    createKart(texShader, otherRenderable,flatShader,system,false);
 
     glm::vec3 x1, x2, x3, x4;
     glm::vec4 color;
@@ -237,7 +237,9 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
     system->setRestitution(1.0f);
 }
 
-void createKart(ParticleRenderablePtr root,ShaderProgramPtr program, DynamicSystemPtr& system,bool isHuman){
+void createKart(ShaderProgramPtr textPrgm, ParticleRenderablePtr root,ShaderProgramPtr program, DynamicSystemPtr& system,bool isHuman){
+
+
     MeshRenderablePtr kart = std::make_shared<MeshRenderable>(program,"../meshes/kart.obj");
     kart->setParentTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat(glm::vec3(1.57f,0,0)),glm::vec3{0.3, 0.3, 0.3}).toMatrix());
     kart->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat{1, 0, 0, 0},glm::vec3{1, 1, 1}).toMatrix());
@@ -258,6 +260,8 @@ void createKart(ParticleRenderablePtr root,ShaderProgramPtr program, DynamicSyst
     wheel->setParentTransform(GeometricTransformation(glm::vec3{-1.3, -0.2, 1.2},glm::quat(glm::vec3(0,0,0)),glm::vec3{0.3, 0.3, 0.3}).toMatrix());
     wheel->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat(1,0,0,0),glm::vec3{1, 1, 1}).toMatrix());
     wheel->setMaterial(Material::Pearl());
+
+
     HierarchicalRenderable::addChild(kart,wheel);
     if(isHuman) {
         MovingWheelPtr wheel2 = std::make_shared<MovingWheel>(program, "../meshes/wheel.obj", true,
@@ -276,7 +280,7 @@ void createKart(ParticleRenderablePtr root,ShaderProgramPtr program, DynamicSyst
                 GeometricTransformation(glm::vec3{0, 0, 0}, glm::quat(1, 0, 0, 0), glm::vec3{1, 1, 1}).toMatrix());
         HierarchicalRenderable::addChild(kart, wheel2);
     }else{
-        WheelPtr wheel2 = std::make_shared<Wheel>(program, "../meshes/wheel.obj","../textures/ice.jpg", true,
+        WheelPtr wheel2 = std::make_shared<Wheel>(program, "../meshes/wheel.obj","../textures/pneu.jpg", true,
                                                               root->getParticule());
         wheel2->setParentTransform(
                 GeometricTransformation(glm::vec3{1.3, -0.2, -1.2}, glm::quat(glm::vec3(0, 3.14f, 0)),
