@@ -156,6 +156,12 @@ glm::quat RotationBetweenVectors(glm::vec3 start, glm::vec3 dest){
 	);
 
 }
+
+void ParticleRenderable::do_iaEvent()
+{
+    for(size_t i=0; i<getChildren().size(); ++i)
+        getChildren()[i]->iaEvent();
+}
 void ParticleRenderable::do_keyPressedEvent(sf::Event& e){
     for(size_t i=0; i<getChildren().size(); ++i)
         getChildren()[i]->keyPressedEvent(e);

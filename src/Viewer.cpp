@@ -193,14 +193,17 @@ void Viewer::resetAnimation()
     m_simulationTime = 0;
 }
 
-void Viewer::addRenderable(RenderablePtr r)
-{
+void Viewer::addRenderable(RenderablePtr r) {
     m_renderables.insert(r);
     r->m_viewer = this;
 }
 
-void Viewer::keyPressedEvent(sf::Event& e)
-{
+void Viewer::iaEvent() {
+    for (RenderablePtr r : m_renderables)
+        r->iaEvent();
+}
+
+void Viewer::keyPressedEvent(sf::Event& e) {
     switch (e.key.code)
     {
     case sf::Keyboard::C:

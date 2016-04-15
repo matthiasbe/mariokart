@@ -168,6 +168,7 @@ public:
      * \param e The key pressed event.
      */
     void keyPressedEvent(sf::Event& e);
+    void iaEvent();
 
     /** \brief Handle a key released event.
      *
@@ -231,6 +232,7 @@ private:
      * \param e The key pressed event.
      */
     virtual void do_keyPressedEvent(sf::Event& e);
+    virtual void do_iaEvent();
 
     /** \brief Handle a key released event.
      *

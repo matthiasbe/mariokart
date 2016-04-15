@@ -9,13 +9,14 @@
 #include "../include/dynamics/ConstantForceField.hpp"
 #include "../include/dynamics/SpringForceField.hpp"
 #include "../include/dynamics/EulerExplicitSolver.hpp"
-
+#include "../include/Renderable.hpp"
 #include "../include/dynamics/ParticleRenderable.hpp"
 #include "../include/dynamics/ParticleListRenderable.hpp"
 #include "../include/dynamics/ConstantForceFieldRenderable.hpp"
 #include "../include/dynamics/SpringForceFieldRenderable.hpp"
 #include "../include/dynamics/SpringListRenderable.hpp"
 #include "../include/dynamics/ControlledForceFieldRenderable.hpp"
+#include "../include/dynamics/IAForceFieldRenderable.hpp"
 #include "../include/MeshRenderable.hpp"
 #include "../include/SteeringWheel.h"
 #include "../include/Wheel.h"
@@ -23,6 +24,7 @@
 #include <vector>
 using namespace std;
 #include <iostream>
+#include <X11/X.h>
 
 
 void createKart(ParticleRenderablePtr root,ShaderProgramPtr program, DynamicSystemPtr& system);
@@ -431,12 +433,9 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
     ControlledForceFieldRenderablePtr forceRenderable = std::make_shared<ControlledForceFieldRenderable>( flatShader, force, mobileRenderable );
     HierarchicalRenderable::addChild(systemRenderable, forceRenderable);
     
-    /*ConstantForceFieldRenderablePtr constantRenderable = std::make_shared<ConstantForceFieldRenderable>( flatShader, force );
-    HierarchicalRenderable::addChild(systemRenderable, constantRenderable);*/
+    IAForceFieldRenderablePtr iaRenderable = std::make_shared<IAForceFieldRenderable>( flatShader, forceOther, otherRenderable );
+    HierarchicalRenderable::addChild(systemRenderable, iaRenderable);
     
-    glm::vec3 force2 = glm::vec3 (0.0,0.0,0.0);
-    //ConstantForceField otherForce = new ConstantForceField(*other, force2);
-
     //Add a damping force field to the mobile.
     DampingForceFieldPtr dampingForceField = std::make_shared<DampingForceField>(vParticle, 0.9);
     system->addForceField( dampingForceField );

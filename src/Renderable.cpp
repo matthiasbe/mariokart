@@ -45,6 +45,11 @@ void Renderable::animate( float time )
   afterAnimate( time );
 }
 
+void Renderable::iaEvent()
+{
+    do_iaEvent();
+}
+
 void Renderable::keyPressedEvent(sf::Event& e)
 {
   do_keyPressedEvent( e );
@@ -74,6 +79,9 @@ void Renderable::mouseMoveEvent(sf::Event& e)
 {
   do_mouseMoveEvent( e );
 }
+
+void Renderable::do_iaEvent()
+{}
 
 void Renderable::do_keyPressedEvent(sf::Event& e)
 {}

@@ -56,6 +56,7 @@ private:
      * @param e A key pressed event.
      */
     void do_keyPressedEvent(sf::Event& e);
+    void do_iaEvent();
     /**@brief Transmit a key released event to children.
      *
      * Transmit a key released event to the children of this renderable.

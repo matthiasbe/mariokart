@@ -13,6 +13,7 @@ class MeshRenderable : public HierarchicalRenderable
         ~MeshRenderable();
         MeshRenderable(ShaderProgramPtr program, const std::string& filename);
     private:
+        void do_iaEvent();
         void do_keyPressedEvent(sf::Event& e);
         void do_keyReleasedEvent(sf::Event& e);
         void do_draw();
