@@ -172,7 +172,7 @@ void ControlledForceFieldRenderable::do_draw()
     m_normals.resize(0);
 
     //Display an arrow representing the movement of the particle
-    for(ParticlePtr p : particles)
+    /*for(ParticlePtr p : particles)
     {
         m_positions.push_back(p->getPosition());
         m_positions.push_back(p->getPosition()  + 2.0f* m_status.movement);
@@ -181,7 +181,7 @@ void ControlledForceFieldRenderable::do_draw()
         m_normals.push_back(glm::vec3(1.0,0.0,0.0));
         m_normals.push_back(glm::vec3(1.0,0.0,0.0));
     }
-
+    */
     //Update data on the GPU
     glcheck(glBindBuffer(GL_ARRAY_BUFFER, m_pBuffer));
     glcheck(glBufferData(GL_ARRAY_BUFFER, m_positions.size()*sizeof(glm::vec3), m_positions.data(), GL_STATIC_DRAW));

@@ -10,8 +10,9 @@
 #include "../include/Wheel.h"
 #include "../include/GeometricTransformation.hpp"
 
-Wheel::Wheel(ShaderProgramPtr program, const std::string& filename,bool rotation, ParticlePtr kart) : 
-    MeshRenderable(program,filename){
+Wheel::Wheel(ShaderProgramPtr program, const std::string& filename,
+             const std::string& texture_filename ,bool rotation, ParticlePtr kart) :
+    TexturedLightedMeshRenderable(program,filename,texture_filename){
     m_direction = rotation;
     m_kart = kart;
 }
