@@ -126,7 +126,7 @@ int getClosestPoint(vector<glm::vec3> points, glm::vec3 position) {
  */
 float getDistance(glm::vec3 p1, glm::vec3 p2, glm::vec3 position) {
     glm::vec3 dir = p2 - p1;
-    glm::vec3 n = glm::vec3(-dir.y, dir.x, dir.z);
+    glm::vec3 n = glm::normalize(glm::vec3(-dir.y, dir.x, dir.z));
     float distance = dot(n, position);
     if (distance < 0) {
         return -distance;
@@ -177,31 +177,26 @@ void IAForceFieldRenderable::do_animate(float time) {
         ptSuivantVirtuel = glm::distance(ptPrecedent, ptActuel) * dirPlanSuivant;
         glm::vec3 dirPlanActuel;
         
+        float distance;
+        float distancePoint = glm::distance(ptActuel, position);
         if (glm::distance(ptSuivantVirtuel, position) < glm::distance(ptPrecedent, position)) {
             dirPlanActuel = dirPlanPrecedent;
+            distance = getDistance(ptPrecedent, ptActuel, position);
         } else {
             dirPlanActuel = dirPlanSuivant;
+            distance = getDistance(ptActuel, ptSuivant, position);
         }
 
-        
-
-        if (glm::orientedAngle(direction, dirPlanActuel, glm::vec3(0, 0, 1)) > 0) {
+        if (glm::orientedAngle(direction, dirPlanActuel, glm::vec3(0, 0, 1)) > 0 && distancePoint > 2) {
             //turning left
             m_status.angle = 1.0f;
-        } else if (glm::orientedAngle(direction, dirPlanActuel, glm::vec3(0, 0, 1)) < 0) {
+        } else if (glm::orientedAngle(direction, dirPlanActuel, glm::vec3(0, 0, 1)) < 0 && distancePoint > 2) {
             //turning right
             m_status.angle = -1.0f;
         } else {
             m_status.angle = 0.0f;
         }
 
-        /*if (m_status.turning_left && !m_status.turning_right) {
-            m_status.angle = 1.0f;
-        } else if (m_status.turning_right && !m_status.turning_left) {
-            m_status.angle = -1.0f;
-        } else {
-            m_status.angle = 0.0f;
-        }*/
         m_status.angle += glm::orientedAngle(glm::vec3(1, 0, 0), glm::normalize(m_kart->getMovement()), glm::vec3(0, 0, 1));
         float cos = std::cos(m_status.angle);
         float sin = std::sin(m_status.angle);
