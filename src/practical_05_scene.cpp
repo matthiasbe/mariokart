@@ -130,8 +130,8 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
     ParticleRenderablePtr mobileRenderable = std::make_shared<ParticleRenderable>( flatShader, mobile );
     HierarchicalRenderable::addChild(systemRenderable, mobileRenderable);
     ShaderProgramPtr texShader = std::make_shared<ShaderProgram>("../shaders/textureVertex.glsl","../shaders/textureFragment.glsl");
+    viewer.addShaderProgram( texShader );
 
-    //METTRE TEXSHADER??
     createKart(texShader, mobileRenderable,flatShader,system,true);
     viewer.getCamera().setKart(mobileRenderable);
     
@@ -239,24 +239,23 @@ void practical05_playPool(Viewer& viewer, DynamicSystemPtr& system, DynamicSyste
 
 void createKart(ShaderProgramPtr textPrgm, ParticleRenderablePtr root,ShaderProgramPtr program, DynamicSystemPtr& system,bool isHuman){
 
-
-    MeshRenderablePtr kart = std::make_shared<MeshRenderable>(program,"../meshes/kart.obj");
+    TexturedLightedMeshRenderablePtr kart = std::make_shared<TexturedLightedMeshRenderable>(textPrgm,"../meshes/kart2.obj", "../textures/kart.jpg");
     kart->setParentTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat(glm::vec3(1.57f,0,0)),glm::vec3{0.3, 0.3, 0.3}).toMatrix());
     kart->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat{1, 0, 0, 0},glm::vec3{1, 1, 1}).toMatrix());
     HierarchicalRenderable::addChild(root,kart);
 
-    SteringWheelPtr volant = std::make_shared<SteringWheel>(program,"../meshes/volant.obj");
+    SteringWheelPtr volant = std::make_shared<SteringWheel>(program,"../meshes/volant2.obj", "../textures/volant.jpg");
     volant->setParentTransform(GeometricTransformation(glm::vec3{0, 0.7, 0},glm::quat(glm::vec3(1.57f,0,0)),glm::vec3{0.3, 0.3, 0.3}).toMatrix());
     volant->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat{1, 0, 0, 0},glm::vec3{1, 1, 1}).toMatrix());
     HierarchicalRenderable::addChild(kart,volant);
     //right back wheel
-    WheelPtr wheel = std::make_shared<Wheel>(program,"../meshes/wheel.obj","../textures/pneu.jpg",true,root->getParticule());
+    WheelPtr wheel = std::make_shared<Wheel>(textPrgm,"../meshes/wheel2.obj","../textures/pneu.jpg",true,root->getParticule());
     wheel->setParentTransform(GeometricTransformation(glm::vec3{1.3, -0.2, 1.2},glm::quat(glm::vec3(0,3.14f,0)),glm::vec3{0.3, 0.3, 0.3}).toMatrix());
     wheel->setMaterial(Material::Pearl());
     wheel->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat(1,0,0,0),glm::vec3{1, 1, 1}).toMatrix());
     HierarchicalRenderable::addChild(kart,wheel);
     
-    wheel = std::make_shared<Wheel>(program,"../meshes/wheel.obj","../textures/pneu.jpg",false,root->getParticule());
+    wheel = std::make_shared<Wheel>(textPrgm,"../meshes/wheel2.obj","../textures/pneu.jpg",false,root->getParticule());
     wheel->setParentTransform(GeometricTransformation(glm::vec3{-1.3, -0.2, 1.2},glm::quat(glm::vec3(0,0,0)),glm::vec3{0.3, 0.3, 0.3}).toMatrix());
     wheel->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat(1,0,0,0),glm::vec3{1, 1, 1}).toMatrix());
     wheel->setMaterial(Material::Pearl());
@@ -280,7 +279,7 @@ void createKart(ShaderProgramPtr textPrgm, ParticleRenderablePtr root,ShaderProg
                 GeometricTransformation(glm::vec3{0, 0, 0}, glm::quat(1, 0, 0, 0), glm::vec3{1, 1, 1}).toMatrix());
         HierarchicalRenderable::addChild(kart, wheel2);
     }else{
-        WheelPtr wheel2 = std::make_shared<Wheel>(program, "../meshes/wheel.obj","../textures/pneu.jpg", true,
+        WheelPtr wheel2 = std::make_shared<Wheel>(textPrgm, "../meshes/wheel2.obj","../textures/pneu.jpg", true,
                                                               root->getParticule());
         wheel2->setParentTransform(
                 GeometricTransformation(glm::vec3{1.3, -0.2, -1.2}, glm::quat(glm::vec3(0, 3.14f, 0)),
@@ -290,14 +289,14 @@ void createKart(ShaderProgramPtr textPrgm, ParticleRenderablePtr root,ShaderProg
         HierarchicalRenderable::addChild(kart, wheel2);
         wheel2->setMaterial(Material::Pearl());
 
-        wheel2 = std::make_shared<Wheel>(program, "../meshes/wheel.obj","../textures/pneu.jpg", false, root->getParticule());
+        wheel2 = std::make_shared<Wheel>(program, "../meshes/wheel2.obj","../textures/pneu.jpg", false, root->getParticule());
         wheel2->setParentTransform(GeometricTransformation(glm::vec3{-1.3, -0.2, -1.2}, glm::quat(glm::vec3(0, 0, 0)),
                                                            glm::vec3{0.3, 0.3, 0.3}).toMatrix());
         wheel2->setLocalTransform(
                 GeometricTransformation(glm::vec3{0, 0, 0}, glm::quat(1, 0, 0, 0), glm::vec3{1, 1, 1}).toMatrix());
         HierarchicalRenderable::addChild(kart, wheel2);
     }
-    MeshRenderablePtr mario = std::make_shared<MeshRenderable>(program,"../meshes/mario.obj");
+    TexturedLightedMeshRenderablePtr mario = std::make_shared<TexturedLightedMeshRenderable>(program,"../meshes/mario2.obj", "../textures/peau.jpg");
     mario->setParentTransform(GeometricTransformation(glm::vec3{0,0, 0.7},glm::quat(glm::vec3(0,0,0)),glm::vec3{0.5, 0.5, 0.5}).toMatrix());
     mario->setLocalTransform(GeometricTransformation(glm::vec3{0, 0, 0},glm::quat{1, 0, 0, 0},glm::vec3{1, 1, 1}).toMatrix());
     HierarchicalRenderable::addChild(kart,mario);

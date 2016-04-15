@@ -8,8 +8,8 @@
 #include "../include/SteeringWheel.h"
 #include "../include/GeometricTransformation.hpp"
 
-SteringWheel::SteringWheel(ShaderProgramPtr program, const std::string& filename) : 
-    MeshRenderable(program,filename){
+SteringWheel::SteringWheel(ShaderProgramPtr program, const std::string& filename, const std::string& texture_filename) :
+        TexturedLightedMeshRenderable(program,filename,texture_filename){
 }
 
 SteringWheel::~SteringWheel() {

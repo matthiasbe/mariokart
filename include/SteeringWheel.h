@@ -8,12 +8,12 @@
 #ifndef STERINGWHEEL_H
 #define	STERINGWHEEL_H
 
-#include "MeshRenderable.hpp"
+#include "texturing/TexturedLightedMeshRenderable.hpp"
 
 
-class SteringWheel : public MeshRenderable{
+class SteringWheel : public TexturedLightedMeshRenderable{
 public:
-    SteringWheel(ShaderProgramPtr program, const std::string& filename);
+    SteringWheel(ShaderProgramPtr program, const std::string& filename, const std::string& texture_filename);
     virtual ~SteringWheel();
 private:
     void animate();

@@ -1,7 +1,7 @@
-/* 
+/*
  * File:   SteringWheel.cpp
  * Author: bouvattj
- * 
+ *
  * Created on 11 avril 2016, 16:22
  */
 
